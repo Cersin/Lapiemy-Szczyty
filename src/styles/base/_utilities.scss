@@ -1,0 +1,26 @@
+// things like margins, centering, align
+//example
+//.u-center-text {
+//  text-align: center !important;
+//}
+//
+//.u-margin-bottom-small { margin-bottom: 1.5rem !important;
+//  @include respond(tab-port) {
+//    margin-bottom: 1rem;
+//  }}
+//.u-margin-bottom-medium {
+//  margin-bottom: 4rem !important;
+//
+//  @include respond(tab-port) {
+//    margin-bottom: 3rem !important;
+//  }
+//}
+@import "src/styles/abstract/variables";
+
+.hover-button {
+  &:hover, &:active {
+    background-color: darken($color-secondary, 8) !important;
+    border-radius: 1rem;
+    box-shadow: .2rem 0rem .5rem 0rem rgba(0,0,0,.80);
+  }
+}
