@@ -6,7 +6,7 @@
       <header class="card__box-title">{{title}}</header>
       <p class="card__box-category">{{category}}</p>
       <p class="card__box-distance">{{distance}}</p>
-      <p class="card__box-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque deleniti nisi quas reprehenderit, accusamus eaque optio ab repudiandae repellat, doloremque, omnis minus. Amet, ea? Expedita sit dolorum ipsa dicta deserunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim dolore, vitae quidem voluptatum laudantium voluptate ex tenetur voluptates, consectetur numquam quas veniam saepe sapiente molestiae dolor. Fugiat temporibus voluptatum quidem?  {{opis}}</p>
+      <p class="card__box-description"> {{description}}</p>
     </div>
   </div>
 </template>
@@ -26,13 +26,12 @@ export default {
 @import "src/styles/abstract/variables";
   .card {
     background-color: #EEEE;
-
     display: flex;
     flex-direction: column;
     align-items: center;
 
     img {
-      width: 80%;
+      width: 90%;
       height: 30vh;
       object-fit: cover;
       object-position: center;
