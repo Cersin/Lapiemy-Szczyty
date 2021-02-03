@@ -1,9 +1,12 @@
 <template>
   <div class="home">
     <home-header></home-header>
-    <h1>elo</h1>
-    <h1>elo</h1>
-    <h1>elo</h1>
+    <div class="articles">
+      <card></card>
+      <card></card>
+      <card></card>
+      <card></card>
+    </div>
   </div>
 
 </template>
@@ -11,9 +14,10 @@
 <script>
 
 import HomeHeader from "@/components/home-header";
+import Card from "@/components/card";
 export default {
   name: "Home",
-  components: {HomeHeader}
+  components: {Card, HomeHeader}
 }
 </script>
 
@@ -22,5 +26,14 @@ export default {
     min-height: 100%;
     display: grid;
     grid-template-rows: 20vw 1fr repeat(2, min-content);
+    justify-content: center;
+  }
+
+  .articles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-gap: 3rem;
+    padding: 2rem;
+    justify-self: center;
   }
 </style>
