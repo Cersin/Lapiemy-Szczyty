@@ -87,6 +87,7 @@ nav {
   color: $color-white;
 
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: space-evenly;
 
