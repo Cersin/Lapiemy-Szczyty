@@ -1,38 +1,26 @@
 <template>
   <div class="home">
-    <div class="category" v-for="category in categories" v-bind:key="category.name">
-      <p>{{ category.name }}</p>
-    </div>
+    <home-header></home-header>
+    <h1>elo</h1>
+    <h1>elo</h1>
+    <h1>elo</h1>
   </div>
 
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 
+import HomeHeader from "@/components/home-header";
 export default {
   name: "Home",
-  computed: {
-    ...mapGetters({
-      categories: 'categories/getCategories'
-    })
-    // categories() {
-    //   return this.$store.getters.categories();
-    // }
-  }
+  components: {HomeHeader}
 }
 </script>
 
 <style lang="scss" scoped>
   .home {
     min-height: 100%;
-    background-color: orangered;
-
-  }
-  .category {
-    grid-row: start-content / end-content;
-
     display: grid;
-
+    grid-template-rows: 20vw 1fr repeat(2, min-content);
   }
 </style>
