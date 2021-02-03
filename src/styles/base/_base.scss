@@ -10,3 +10,10 @@ html {
   box-sizing: border-box;
   font-size: 62.5%; //1rem = 10px; 10px/16px = 62.5%
 }
+
+.full-page {
+  min-height: 100vh;
+
+  display: grid;
+  grid-template-rows: [nav-start] min-content [nav-end start-content] 1fr [end-content start-footer] min-content [end-footer];
+}
