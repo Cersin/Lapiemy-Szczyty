@@ -6,7 +6,10 @@ export default {
     namespaced: true,
     state() {
         return {
-
+            categories: [
+                { name: 'Tatry'},
+                { name: 'Mała Fatra'}
+            ]
         }
     },
     mutations: mutations,
