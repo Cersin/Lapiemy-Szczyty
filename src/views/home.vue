@@ -6,6 +6,7 @@
       <card></card>
       <card></card>
       <card></card>
+      <card></card>
     </div>
   </div>
 
@@ -35,5 +36,10 @@ export default {
     grid-gap: 3rem;
     padding: 2rem;
     justify-self: center;
+    width: 70%;
+    
+    @media only screen and (max-width: 700px)  {
+      width: 100%;
+    }
   }
 </style>
