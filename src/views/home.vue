@@ -2,13 +2,9 @@
   <div class="home">
     <home-header></home-header>
     <div class="articles">
-      <card></card>
-      <card></card>
-      <card></card>
-      <card></card>
-      <card></card>
+      <card title="tytuł" distance="666km" category="pieszo" description="opis"></card>
+     
     </div>
-    -->
   </div>
 </template>
 
@@ -18,7 +14,12 @@ import HomeHeader from "@/components/home-header";
 import Card from "@/components/card";
 export default {
   name: "Home",
-  components: {Card, HomeHeader}
+  components: {Card, HomeHeader},
+  data(){
+    return{
+     
+    }
+  }
 }
 </script>
 

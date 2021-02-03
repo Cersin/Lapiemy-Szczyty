@@ -3,10 +3,10 @@
     <img src="../assets/ok.jpg" alt="Article photo">
 
     <div class="card__box">
-      <header class="card__box-title">Trzy Szczyty - Kriźna, Ostredok</header>
-      <p class="card__box-category">Wycieczki, Słowacja</p>
-      <p class="card__box-distance">Dystans: 7,6km</p>
-      <p class="card__box-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consectetur venenatis blandit. Praesent vehicula, libero non pretium vulputate, lacus arcu facilisis lectus, sed feugiat tellus nulla eu dolor. Nulla porta bibendum lectus quis euismod. Aliquam volutpat ultricies porttitor. Cras risus nisi, accumsan vel cursus ut, sollicitudin vitae dolor. Fusce scelerisque eleifend lectus in bibendum. Suspendisse lacinia egestas felis a volutpat.</p>
+      <header class="card__box-title">{{title}}</header>
+      <p class="card__box-category">{{category}}</p>
+      <p class="card__box-distance">{{distance}}</p>
+      <p class="card__box-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque deleniti nisi quas reprehenderit, accusamus eaque optio ab repudiandae repellat, doloremque, omnis minus. Amet, ea? Expedita sit dolorum ipsa dicta deserunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim dolore, vitae quidem voluptatum laudantium voluptate ex tenetur voluptates, consectetur numquam quas veniam saepe sapiente molestiae dolor. Fugiat temporibus voluptatum quidem?  {{opis}}</p>
     </div>
   </div>
 </template>
@@ -14,6 +14,11 @@
 <script>
 export default {
   name: "card",
+  props:[
+    "title",
+    "category",
+    "distance",
+    "description"]
 };
 </script>
 
