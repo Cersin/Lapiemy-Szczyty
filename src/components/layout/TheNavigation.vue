@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <div class="logo">
+    <div class="logo" @click="$router.push('/')">
       <div class="logo-text">
         <p>Łapie<span class="logo-text-green">my</span></p>
         <p>Szczy<span class="logo-text-green">ty</span></p>
@@ -50,10 +50,9 @@ nav {
 
   &-text {
     font-size: 1.8rem;
-    font-weight: 600;
-    letter-spacing: 1.5px;
+    font-weight: 400;
+    letter-spacing: 3px;
     transition: all .7s ease-in;
-
 
     &-green {
       color: $color-secondary;
