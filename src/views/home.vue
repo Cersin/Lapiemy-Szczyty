@@ -2,8 +2,8 @@
   <div class="home">
     <home-header></home-header>
     <div class="articles">
-     <card v-for="(article,id) in articles" 
-        :key="id" 
+     <card v-for="article in articles"
+        :key="article.timeStamp"
         :title=article.title 
         :category=article.category 
         :distance=article.distance 
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-
+import { mapGetters } from "vuex";
 import HomeHeader from "@/components/home-header";
 import Card from "@/components/card";
 export default {
@@ -22,14 +22,13 @@ export default {
   components: {Card, HomeHeader},
   data(){
     return{
-      articles:[
-        {title:"Na Chebzie i nazot",category:"Pieszo",distance:"2km",description:"Jak se iść na Chebzie co by się nie zmęczyć"},
-        {title:"W pogoni za dawnym laskiem",category:"Rowerek",distance:"4km",description:"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum accusamus ullam nihil enim saepe itaque ad quis modi eligendi qui voluptatum animi, magni ducimus harum numquam similique incidunt inventore laboriosam."},
-        {title:"Do Jaworzna",category:"Brum brum",distance:"60km",description:"Tam skąd ludzie tak szybko nie wracają, o ile wgl wracają"},
-        {title:"Trzy Szczyty - Kriźna, Ostredok i Plośka",category:"Wycieczki, Słowacja", distance:"7,6km",description:"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum accusamus ullam nihil enim saepe itaque ad quis modi eligendi qui voluptatum animi, magni ducimus harum numquam similique incidunt inventore laboriosam.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum accusamus ullam nihil enim saepe itaque ad quis modi eligendi qui voluptatum animi, magni ducimus harum numquam similique incidunt inventore laboriosam."}
-      ],
-      zmienna: 12,
+
     }
+  },
+  computed: {
+    ...mapGetters({
+      articles: "articles/getPosts"
+    })
   }
 }
 </script>

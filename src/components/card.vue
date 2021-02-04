@@ -6,7 +6,7 @@
       <header class="card__box-title">{{title}}</header>
       <p class="card__box-category">{{category}}</p>
       <p class="card__box-distance">{{distance}}</p>
-      <p class="card__box-description"> {{description}}</p>
+      <p class="card__box-description">{{description}}</p>
     </div>
   </div>
 </template>
