@@ -1,10 +1,9 @@
 <template>
   <section>
-    <div @click="goToArticleList(category.name)" class="category" v-for="category in categories" :key="category.name">
-      <img class="category-img" :src="require(`../../assets/article-photos/${category.photo}.jpg`)" alt="Article photo">
-      <h1 class="category-name">{{ category.name }}</h1>
-    </div>
-
+      <div @click="goToArticleList(category.name)" class="category" v-for="category in categories" :key="category.name">
+        <img class="category-img" :src="require(`../../assets/article-photos/${category.photo}.jpg`)" alt="Article photo">
+        <h1 class="category-name">{{ category.name }}</h1>
+      </div>
   </section>
 </template>
 
@@ -31,19 +30,19 @@ export default {
 
 section {
   width: 80%;
-  margin-top: 2rem;
+  margin: 2rem 0;
 
   display: grid;
   grid-gap: 3rem;
   align-content: start;
   justify-self: center;
-  grid-template-rows: repeat(auto-fit, 20vh);
 }
 
 .category {
   display: grid;
   grid-template-column: 1fr;
   grid-template-rows: 1fr;
+  height: 20vh;
   cursor: pointer;
 
   &-img {
