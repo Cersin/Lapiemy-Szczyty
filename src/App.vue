@@ -5,7 +5,11 @@
   <!--  </div>-->
   <div class="full-page">
     <the-navigation></the-navigation>
-    <router-view/>
+    <router-view v-slot="slotProps">
+      <transition name="route" mode="out-in">
+        <component :is="slotProps.Component"></component>
+      </transition>
+    </router-view>
     <the-footer></the-footer>
   </div>
 </template>
@@ -17,6 +21,26 @@
 @import "styles/base/utilities";
 @import "styles/abstract/mixins";
 @import "styles/abstract/variables";
+
+.route-enter-from {
+  opacity: .5;
+  transform: translateX(-150px);
+}
+.route-enter-to,
+.route-leave-from {
+  opacity: 1;
+  transform: translateX(0);
+}
+.route-enter-active {
+  transition: all .3s ease-out;
+}
+.route-leave-to {
+  opacity: .5;
+  transform: translateX(150px);
+}
+.route-leave-active {
+  transition: all .3s ease-in;
+}
 </style>
 
 <script>
