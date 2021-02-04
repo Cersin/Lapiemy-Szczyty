@@ -54,6 +54,7 @@ section {
 
     grid-row: 1 / 2;
     grid-column: 1 / 2;
+    transition: all 1s;
   }
 
   &-name {
@@ -65,6 +66,7 @@ section {
     grid-column: 1 / 2;
     align-self: center;
     justify-self: center;
+    text-align: center;
     transition: all .5s;
   }
 
@@ -72,6 +74,11 @@ section {
   &:active &-name {
     font-size: 4rem;
     color: lighten($color-secondary, 10);
+  }
+
+  &:hover &-img,
+  &:active &-img {
+    filter: brightness(90%);
   }
 }
 
