@@ -6,6 +6,8 @@ import store from './store';
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+const moment = require('moment');
+import 'moment/locale/pl';
 
 library.add(faPaw);
 
@@ -15,5 +17,8 @@ app.component("font-awesome-icon", FontAwesomeIcon);
 
 app.use(router);
 app.use(store);
+app.use(require('vue-moment-v3'), {
+    moment
+});
 
 app.mount('#app');

@@ -99,6 +99,10 @@ nav {
     padding: 1rem;
     transition: all .5s;
 
+    @media only screen and (max-width: 700px)  {
+      font-size: 1.4rem;
+    }
+
     &:hover {
       background-color: darken($color-secondary, 8);
       border-radius: 1rem;

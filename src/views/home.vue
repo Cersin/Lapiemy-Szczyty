@@ -4,10 +4,11 @@
     <div class="articles">
      <card v-for="article in articles"
         :key="article.timeStamp"
-        :title=article.title 
-        :category=article.category 
-        :distance=article.distance 
+        :title=article.title
+        :category=article.category
+        :distance=article.distance
         :description=article.description
+        :tripTime="article.tripDate"
      ></card>
     </div>
   </div>
@@ -17,6 +18,7 @@
 import { mapGetters } from "vuex";
 import HomeHeader from "@/components/home-header";
 import Card from "@/components/card";
+
 export default {
   name: "Home",
   components: {Card, HomeHeader},
@@ -44,7 +46,7 @@ export default {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     grid-gap: 3rem;
-    padding: 2rem;
+    padding: 2rem 0;
     justify-self: center;
     width: 70%;
     
