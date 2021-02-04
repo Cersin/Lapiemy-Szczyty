@@ -10,7 +10,7 @@
     </div>
 
     <div class="card__bottom">
-      <button class="card__bottom-button">
+      <button @click="goToArticle()" class="card__bottom-button">
         <span class="card__bottom-button-arrow"></span>
         <span class="card__bottom-button-text">Czytaj</span>
       </button>
@@ -23,13 +23,19 @@
 export default {
   name: "card",
   props:[
+    "id",
     "title",
     "category",
     "distance",
     "description",
     "tripTime",
     "mainPhoto"
-  ]
+  ],
+  methods: {
+    goToArticle() {
+      this.$router.push({ path: `/wycieczki/${this.category}/${this.title}`});
+    }
+  }
 };
 </script>
 

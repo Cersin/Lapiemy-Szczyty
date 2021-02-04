@@ -3,7 +3,8 @@
     <home-header></home-header>
     <div class="articles">
      <card v-for="article in articles"
-           :key="article.timeStamp"
+           :key="article.id"
+           :id="article.id"
            :title=article.title
            :category=article.category
            :distance=article.distance
