@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <img src="../assets/ok.jpg" alt="Article photo">
+    <img :src="require(`../assets/article-photos/${mainPhoto}.jpg`)" alt="Article photo">
 
     <div class="card__box">
       <header class="card__box-title">{{ title }}</header>
@@ -27,7 +27,9 @@ export default {
     "category",
     "distance",
     "description",
-    "tripTime"]
+    "tripTime",
+    "mainPhoto"
+  ]
 };
 </script>
 

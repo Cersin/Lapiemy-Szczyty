@@ -7,8 +7,9 @@ export default {
     state() {
         return {
             categories: [
-                { name: 'Tatry'},
-                { name: 'Mała Fatra'}
+                { name: 'Tatry', photo: 'ok'},
+                { name: 'Mała Fatra', photo: 'ok2'},
+                { name: 'Beskid Śląski', photo: 'ok'}
             ]
         }
     },
