@@ -10,10 +10,11 @@
     </div>
 
     <div class="card__bottom">
-      <button @click="goToArticle()" class="card__bottom-button">
-        <span class="card__bottom-button-arrow"></span>
-        <span class="card__bottom-button-text">Czytaj</span>
-      </button>
+        <button class="card__bottom-button" @click="goToArticle()">
+            <span class="card__bottom-button-polygon"></span>
+            <span class="card__bottom-button-text">Czytaj</span>
+        </button>
+      
       <p class="card__bottom-date">{{ $filters.moment(tripTime, "DD MMMM YYYY") }}</p>
     </div>
     
@@ -22,7 +23,7 @@
 
 <script>
 export default {
-  name: "card",
+  name: "cardTest",
   props:[
     "id",
     "title",
@@ -100,14 +101,12 @@ export default {
       width: 100%;
       justify-content: space-between;
       padding: 1rem 2rem;
-      background-color: $color-secondary-darker;
 
       &-button {
-        border: none;
-        background-color: $color-grey;
+        border:none ;
         display: flex;
         padding: .5rem;
-        border-radius: 5px;
+        box-shadow: 0 0.5rem 1rem rgba(black, 0.2);
         font-family: "Comic Sans MS", sans-serif;
         cursor: pointer;
         transition: all .3s;
@@ -120,20 +119,22 @@ export default {
           background-color: darken($color-grey-light, 10);
         }
 
-
-        &-arrow {
-          background-color: $color-secondary-darker;
-          clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
-          width: 3rem;
-          height: 2rem;
-          border-radius: 10px;
+        &-polygon{
+            background-color: $color-secondary;
+            // clip-path: polygon(0% 0%, 80% 0%, 100% 100%, 0% 100%);
+            clip-path: polygon(0% 100%, 25% 30%, 40% 60%,60% 10%, 100% 100%, 0% 100%);
+            width: 2.5rem;
+            height: 2.5rem;
+            
         }
 
         &-text {
-          margin-left: .5rem;
+          margin-left: 1rem;
+          margin-right: 1rem;
           align-self: flex-end;
           color: $color-secondary-darker;
-          font-weight: 800;
+          font-weight: 700;
+          font-size: 1.4rem;
 
         }
       }

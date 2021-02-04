@@ -40,7 +40,7 @@ section {
 
 .category {
   display: grid;
-  grid-template-column: 1fr;
+  grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   height: 20vh;
   cursor: pointer;
@@ -82,7 +82,5 @@ section {
   }
 }
 
-h1{
-}
 
 </style>

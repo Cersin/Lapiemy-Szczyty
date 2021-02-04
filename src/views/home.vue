@@ -13,6 +13,16 @@
            :mainPhoto="article.mainPhoto"
 
      ></card>
+     <card-test v-for="article in articles"
+           :key="article.id"
+           :id="article.id"
+           :title=article.title
+           :category=article.category
+           :distance=article.distance
+           :description=article.description
+           :tripTime="article.tripDate"
+           :mainPhoto="article.mainPhoto"
+     ></card-test>
     </div>
   </div>
 </template>
@@ -21,10 +31,11 @@
 import { mapGetters } from "vuex";
 import HomeHeader from "@/components/home-header";
 import Card from "@/components/card";
+import CardTest from "@/components/cardTest";
 
 export default {
   name: "Home",
-  components: {Card, HomeHeader},
+  components: {Card,CardTest, HomeHeader},
   data(){
     return{
 

@@ -57,7 +57,7 @@ section {
 
 .article {
   display: grid;
-  grid-template-column: 1fr;
+  grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   height: 40vh;
   cursor: pointer;
