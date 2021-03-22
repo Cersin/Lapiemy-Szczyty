@@ -1,17 +1,23 @@
 <template>
   <section>
-    <div @click="goToArticleList(article.title)" class="article" v-for="article in categoryArticles" :key="article.title">
-      <img class="article-img" :src="require(`../../assets/article-photos/${article.mainPhoto}.jpg`)" alt="Article photo">
+    <div @click="goToArticleList(article.title)" class="article" v-for="article in categoryArticles"
+         :key="article.title">
+      <img class="article-img" :src="require(`../../assets/article-photos/${article.mainPhoto}.jpg`)"
+           alt="Article photo">
       <h1 class="article-name">{{ article.title }}</h1>
     </div>
 
 
-    <div @click="goToArticleList(article.title)" class="article" v-for="article in categoryArticles" :key="article.title">
-      <img class="article-img" :src="require(`../../assets/article-photos/${article.mainPhoto}.jpg`)" alt="Article photo">
+    <div @click="goToArticleList(article.title)" class="article" v-for="article in categoryArticles"
+         :key="article.title">
+      <img class="article-img" :src="require(`../../assets/article-photos/${article.mainPhoto}.jpg`)"
+           alt="Article photo">
       <h1 class="article-name">{{ article.title }}</h1>
     </div>
-    <div @click="goToArticleList(article.title)" class="article" v-for="article in categoryArticles" :key="article.title">
-      <img class="article-img" :src="require(`../../assets/article-photos/${article.mainPhoto}.jpg`)" alt="Article photo">
+    <div @click="goToArticleList(article.title)" class="article" v-for="article in categoryArticles"
+         :key="article.title">
+      <img class="article-img" :src="require(`../../assets/article-photos/${article.mainPhoto}.jpg`)"
+           alt="Article photo">
       <h1 class="article-name">{{ article.title }}</h1>
     </div>
   </section>
@@ -33,8 +39,8 @@ export default {
     }
   },
   methods: {
-    goToArticleList() {
-      console.log("ok");
+    goToArticleList(title) {
+      this.$router.push({path: `/wycieczki/${this.category}/${title}`});
     }
   }
 }
