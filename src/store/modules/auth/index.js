@@ -5,7 +5,7 @@ import getters from "@/store/modules/auth/getters";
 export default {
     state() {
         return {
-            isLogged: null
+            isLogged: false
         }
     },
     mutations: mutations,

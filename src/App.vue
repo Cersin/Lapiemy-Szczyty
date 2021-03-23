@@ -26,18 +26,22 @@
   opacity: .5;
   transform: translateX(-150px);
 }
+
 .route-enter-to,
 .route-leave-from {
   opacity: 1;
   transform: translateX(0);
 }
+
 .route-enter-active {
   transition: all .3s ease-out;
 }
+
 .route-leave-to {
   opacity: .5;
   transform: translateX(150px);
 }
+
 .route-leave-active {
   transition: all .3s ease-in;
 }
@@ -46,7 +50,12 @@
 <script>
 import TheFooter from "@/components/layout/TheFooter";
 import TheNavigation from "@/components/layout/TheNavigation";
+
 export default {
-  components: {TheNavigation, TheFooter }
+  components: {TheNavigation, TheFooter},
+  beforeCreate() {
+    console.log(this.$store.dispatch('autoLogin'));
+
+  }
 }
 </script>

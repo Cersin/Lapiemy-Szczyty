@@ -12,13 +12,19 @@
       <router-link class="routing-element" to="/wycieczki">Wycieczki</router-link>
       <router-link class="routing-element" to="/galeria">Galeria</router-link>
       <router-link class="routing-element" to="/o-nas">O nas</router-link>
+      <router-link v-if="isLogged" class="routing-element" to="/admin">Admin</router-link>
     </div>
   </nav>
 </template>
 
 <script>
 export default {
-  name: "TheNavigation"
+  name: "TheNavigation",
+  computed: {
+    isLogged() {
+      return this.$store.getters.isLogged;
+    }
+  }
 }
 </script>
 
