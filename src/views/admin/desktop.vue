@@ -1,10 +1,17 @@
 <template>
-  <h1>desktop</h1>
+  <div>
+    <button @click="addArticle">DODAJ ARTYKUł</button>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "desktop"
+  name: "desktop",
+  methods: {
+    addArticle() {
+      this.$router.push('/admin/articles/add');
+    }
+  }
 }
 </script>
 
