@@ -9,6 +9,7 @@
 <script>
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import '@ckeditor/ckeditor5-build-classic/build/translations/pl';
 export default {
   name: "addArticle",
   components: {
@@ -20,6 +21,7 @@ export default {
       editorData: '<p>Content of the editor.</p>',
       editorConfig: {
         // The configuration of the editor.
+        language: 'pl'
       }
     }
   }
