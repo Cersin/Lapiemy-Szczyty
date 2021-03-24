@@ -32,6 +32,7 @@ export default {
         });
       } catch (e) {
         this.error = e.message;
+        window.alert(this.error);
         console.log(e.message);
       }
     }
