@@ -74,12 +74,6 @@ export default {
     }
   },
   methods: {
-<<<<<<< HEAD
-    addPost() {
-      console.log(this.duration);
-      console.log(this.editorData);
-      console.log(typeof(this.duration));
-=======
     async addPost() {
       try {
         await this.$store.dispatch('articles/sendPost', {
@@ -90,7 +84,6 @@ export default {
         console.log(e.message);
         console.log(e.response.data.message);
       }
->>>>>>> 95b1ba60057246b476959c6eead791dfbea908f4
     }
   }
 }
