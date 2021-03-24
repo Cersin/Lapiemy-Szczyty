@@ -21,6 +21,7 @@
 @import "styles/base/utilities";
 @import "styles/abstract/mixins";
 @import "styles/abstract/variables";
+@import "styles/components/post.scss";
 
 .route-enter-from {
   opacity: .5;

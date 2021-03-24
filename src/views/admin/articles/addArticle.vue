@@ -73,7 +73,9 @@ export default {
   },
   methods: {
     addPost() {
-      console.log(this.tripDate);
+      console.log(this.duration);
+      console.log(this.editorData);
+      console.log(typeof(this.duration));
     }
   }
 }
@@ -81,4 +83,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~vue-wysiwyg/dist/vueWysiwyg.css";
+.ck-content p{
+  color: red;
+}
 </style>
