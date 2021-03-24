@@ -26,7 +26,7 @@ const routes = [
     {path: '/admin/login', component: login},
     {path: '/admin/articles', component: list, meta: {requiresLogin: true}},
     {path: '/admin/articles/:article/edit', component: editArticle, meta: {requiresLogin: true}, props: true},
-    {path: '/admin/articles/:article/add', component: addArticle, meta: {requiresLogin: true}, props: true},
+    {path: '/admin/articles/add', component: addArticle, meta: {requiresLogin: true}},
     {path: '/admin/category', component: listCategory, meta: {requiresLogin: true}},
     {path: '/admin/category/:category/edit', component: editCategory, meta: {requiresLogin: true}, props: true},
     {path: '/admin/category/:category/add', component: addCategory, meta: {requiresLogin: true}, props: true}
