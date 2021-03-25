@@ -14,6 +14,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/vue-fontawesome": "^3.0.0-3",
+    "@heaglock/custom-classic-ckeditor5": "0.0.1",
     "@tinymce/tinymce-vue": "^4.0.0",
     "@vue/composition-api": "^1.0.0-rc.5",
     "core-js": "^3.6.5",

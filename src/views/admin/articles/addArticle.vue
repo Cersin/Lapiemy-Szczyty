@@ -50,7 +50,7 @@
 <script>
 import CKEditor from '@ckeditor/ckeditor5-vue';
 
-import Editor from '../../../ckeditor5/build/ckeditor.js';
+import Editor from '@heaglock/custom-classic-ckeditor5';
 
 import '@ckeditor/ckeditor5-build-classic/build/translations/pl';
 
@@ -137,6 +137,7 @@ export default {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             }
          }
+         
         // heading: {
         //     options: [
         //         { model: 'paragraph', title: 'Paragraf', class: 'ck-heading_paragraph' },
