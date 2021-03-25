@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^27.0.0",
+    "@ckeditor/ckeditor5-horizontal-line": "^27.0.0",
     "@ckeditor/ckeditor5-vue": "^2.0.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",

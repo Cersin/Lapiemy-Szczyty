@@ -1,4 +1,5 @@
 <template>
+<div>
   <form>
     <div class="input">
       <label for="title">Tytuł</label>
@@ -39,12 +40,18 @@
     <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
     <button @click.prevent="addPost()">Add test</button>
   </form>
-
+  <div class="ck-content">
+    {{temporaryPost}}
+    <h2>Content of the editor.</h2><p>&nbsp;</p><h4>coś jeszcze</h4>
+  </div>
+</div>
 </template>
 
 <script>
 import CKEditor from '@ckeditor/ckeditor5-vue';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+import Editor from '../../../ckeditor5/build/ckeditor.js';
+
 import '@ckeditor/ckeditor5-build-classic/build/translations/pl';
 
 export default {
@@ -64,17 +71,87 @@ export default {
         duration: null, // no required
         distance: null, // no required
       },
+      temporaryPost: "test",
 
-      editor: ClassicEditor,
+      editor: Editor,
       editorData: '<p>Content of the editor.</p>',
       editorConfig: {
         // The configuration of the editor.
-        language: 'pl'
+        toolbar: {
+					items: [
+						'heading',
+						'|',
+						'fontFamily',
+						'fontSize',
+						'fontColor',
+						'fontBackgroundColor',
+						'highlight',
+						'|',
+						'bold',
+						'italic',
+						'link',
+						'bulletedList',
+						'numberedList',
+						'|',
+						'alignment',
+						'outdent',
+						'indent',
+						'|',
+						'imageUpload',
+						'blockQuote',
+						'insertTable',
+						'mediaEmbed',
+						'horizontalLine',
+						'|',
+						'undo',
+						'redo'
+					]
+				},
+				language: 'pl',
+				image: {
+					toolbar: [
+						'imageTextAlternative',
+						'imageStyle:full',
+						'imageStyle:side',
+						'linkImage'
+					]
+				},
+				table: {
+					contentToolbar: [
+						'tableColumn',
+						'tableRow',
+						'mergeTableCells',
+						'tableCellProperties',
+						'tableProperties'
+					]
+				},
+         simpleUpload: {
+            // The URL that the images are uploaded to.
+            uploadUrl: 'http://example.com',
+
+            // Enable the XMLHttpRequest.withCredentials property.
+            withCredentials: true,
+
+            // Headers sent along with the XMLHttpRequest to the upload server.
+            headers: {
+                'X-CSRF-TOKEN': 'CSRF-Token',
+                Authorization: 'Bearer <JSON Web Token>'
+            }
+         }
+        // heading: {
+        //     options: [
+        //         { model: 'paragraph', title: 'Paragraf', class: 'ck-heading_paragraph' },
+        //         { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+        //         { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+        //     ]
+        // },
       }
     }
   },
   methods: {
     async addPost() {
+      console.log(this.editor.builtinPlugins.map( plugin => plugin.pluginName ));
+      this.temporaryPost = this.editorData;
       try {
         await this.$store.dispatch('articles/sendPost', {
           post: this.post,
@@ -84,9 +161,12 @@ export default {
         console.log(e.message);
         console.log(e.response.data.message);
       }
-    }
+    },
   }
-}
+    
+  }
+
+
 </script>
 
 <style lang="scss" scoped>
