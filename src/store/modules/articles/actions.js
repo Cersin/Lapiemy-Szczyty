@@ -9,7 +9,7 @@ export default {
             description: payload.post.description,
             category: payload.post.category,
             distance: payload.post.distance,
-            mainPhoto: payload.post.mainPhoto,
+            mainPhoto: payload.post.mainPhotoURL,
             content: payload.content,
             duration: payload.post.duration,
             tripDate: payload.post.tripDate
