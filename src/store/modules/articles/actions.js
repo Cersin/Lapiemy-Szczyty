@@ -24,5 +24,12 @@ export default {
         await context.commit('setPosts', {
             articles: posts.data.data.articles
         });
+    },
+
+    async getArticlesByCategory(context, payload) {
+        const articles = await HTTP.get(`articles?category=${payload.category}`);
+        await context.commit('setArticle', {
+            articles: articles.data.data.articles
+        });
     }
 }

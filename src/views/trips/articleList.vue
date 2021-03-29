@@ -1,25 +1,12 @@
 <template>
   <section>
-    <div @click="goToArticleList(article.title)" class="article" v-for="article in categoryArticles"
+    <div @click="goToArticleList(article.title)" class="article" v-for="article in articles"
          :key="article.title">
-      <img class="article-img" :src="require(`../../assets/article-photos/${article.mainPhoto}.jpg`)"
+      <img class="article-img" :src="`http://${article.mainPhoto}`"
            alt="Article photo">
       <h1 class="article-name">{{ article.title }}</h1>
     </div>
 
-
-    <div @click="goToArticleList(article.title)" class="article" v-for="article in categoryArticles"
-         :key="article.title">
-      <img class="article-img" :src="require(`../../assets/article-photos/${article.mainPhoto}.jpg`)"
-           alt="Article photo">
-      <h1 class="article-name">{{ article.title }}</h1>
-    </div>
-    <div @click="goToArticleList(article.title)" class="article" v-for="article in categoryArticles"
-         :key="article.title">
-      <img class="article-img" :src="require(`../../assets/article-photos/${article.mainPhoto}.jpg`)"
-           alt="Article photo">
-      <h1 class="article-name">{{ article.title }}</h1>
-    </div>
   </section>
 </template>
 
@@ -33,10 +20,12 @@ export default {
   computed: {
     ...mapGetters({
       articles: 'articles/getCategoryPosts'
-    }),
-    categoryArticles() {
-      return this.articles(this.category);
-    }
+    })
+  },
+  beforeCreate() {
+    this.$store.dispatch('articles/getArticlesByCategory', {
+      category: this.category
+    });
   },
   methods: {
     goToArticleList(title) {

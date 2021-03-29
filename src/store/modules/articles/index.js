@@ -6,8 +6,8 @@ export default {
     namespaced: true,
     state() {
         return {
-            articles: null
-
+            articles: null,
+            articlesCategory: null
         }
     },
     mutations: mutations,
