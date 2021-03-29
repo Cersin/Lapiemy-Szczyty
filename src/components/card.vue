@@ -1,11 +1,11 @@
 <template>
   <div class="card">
-    <img :src="require(`../assets/article-photos/${mainPhoto}.jpg`)" alt="Article photo">
+    <img :src="`http://${mainPhoto}`" alt="Article photo">
 
     <div class="card__box">
       <header class="card__box-title">{{ title }}</header>
       <p class="card__box-category">{{ category }}</p>
-      <p class="card__box-distance">{{ distance }}</p>
+      <p class="card__box-distance">{{ distance }} km</p>
       <p class="card__box-description">{{ description }}</p>
     </div>
 

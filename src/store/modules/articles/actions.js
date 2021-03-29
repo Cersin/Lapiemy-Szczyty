@@ -9,12 +9,20 @@ export default {
             description: payload.post.description,
             category: payload.post.category,
             distance: payload.post.distance,
-            mainPhoto: payload.post.mainPhotoURL,
+            mainPhoto: payload.mainPhoto,
             content: payload.content,
             duration: payload.post.duration,
-            tripDate: payload.post.tripDate
+            tripDate: payload.post.tripDate,
+            map: payload.post.map
         });
 
         await router.push({path: '/admin'});
+    },
+
+    async getFourArticles(context) {
+        const posts = await HTTP.get('articles?skip=0&limit=4');
+        await context.commit('setPosts', {
+            articles: posts.data.data.articles
+        });
     }
 }

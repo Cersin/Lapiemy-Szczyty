@@ -38,6 +38,11 @@
         <input id="distance" v-model="post.distance" type="number">
       </div>
 
+      <div class="input">
+        <label for="map">Mapa</label>
+        <input id="map" v-model="post.map" type="text">
+      </div>
+
       <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
       <button @click.prevent="addPost()">Add test</button>
     </form>
@@ -68,11 +73,11 @@ export default {
         title: null, // required
         description: null, // required
         category: null, // required
-        mainPhotoURL: null, // // required
         images: null, // no required
         tripDate: null, // required
         duration: null, // no required
         distance: null, // no required
+        map: null // no required
       },
       editor: Editor,
       editorData: '<p>Content of the editor.</p>',
@@ -151,24 +156,18 @@ export default {
   },
   methods: {
     async addPost() {
-      if (this.mainPhoto) {
         let formData = new FormData();
         formData.append('upload', this.mainPhoto);
-        try {
-          const imageRespond = await HTTP.post('image/send', formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          });
-          this.mainPhotoURL = imageRespond.data.url;
-        } catch (e) {
-          console.log(e);
-        }
-      }
       try {
+        const imageRespond = await HTTP.post('image/send', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
         await this.$store.dispatch('articles/sendPost', {
           post: this.post,
-          content: this.editorData
+          content: this.editorData,
+          mainPhoto: imageRespond.data.url
         });
       } catch (e) {
         console.log(e.message);
