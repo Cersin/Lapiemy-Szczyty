@@ -1,7 +1,7 @@
 <template>
   <section>
       <div @click="goToArticleList(category.name)" class="category" v-for="category in categories" :key="category.name">
-        <img class="category-img" :src="require(`../../assets/article-photos/${category.photo}.jpg`)" alt="Article photo">
+        <img class="category-img" :src="`http://${category.photo}`" alt="Article photo">
         <h1 class="category-name">{{ category.name }}</h1>
       </div>
   </section>
@@ -12,6 +12,9 @@ import {mapGetters} from "vuex";
 
 export default {
   name: "tripsCategories",
+  beforeCreate() {
+    this.$store.dispatch('categories/getCategories');
+  },
   computed: {
     ...mapGetters({
       categories: 'categories/getCategories'
