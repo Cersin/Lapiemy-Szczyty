@@ -20,6 +20,9 @@ export default {
     },
 
     async getFourArticles(context) {
+        if (context.state.articles) {
+            return;
+        }
         const posts = await HTTP.get('articles?skip=0&limit=4');
         await context.commit('setPosts', {
             articles: posts.data.data.articles
