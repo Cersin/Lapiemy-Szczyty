@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <img :src="`http://${mainPhoto}`" alt="Article photo">
+    <img :src="mainPhoto" alt="Article photo">
 
     <div class="card__box">
       <header class="card__box-title">{{ title }}</header>
