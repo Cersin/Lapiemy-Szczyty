@@ -2,7 +2,7 @@
   <section>
     <div @click="goToArticleList(article.title)" class="article" v-for="article in articles"
          :key="article.title">
-      <img class="article-img" :src="`http://${article.mainPhoto}`"
+      <img class="article-img" :src="article.mainPhoto"
            alt="Article photo">
       <h1 class="article-name">{{ article.title }}</h1>
     </div>

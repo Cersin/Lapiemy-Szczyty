@@ -35,11 +35,6 @@ export default {
     ...mapGetters({
       articles: "articles/getPosts"
     })
-  },
-  methods: {
-    test() {
-      console.log(this.articles[1]._id);
-    }
   }
 }
 </script>
