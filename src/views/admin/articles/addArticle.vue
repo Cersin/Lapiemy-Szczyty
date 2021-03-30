@@ -13,7 +13,9 @@
 
       <div class="input">
         <label for="category">Kategoria</label>
-        <input id="category" v-model="post.category" type="text">
+        <select id="category" name="category">
+          <option v-for="(category, i) in categories" v-bind:key="i" value="category.name">{{category.name}}</option>
+        </select>
       </div>
 
       <div class="input">
@@ -72,6 +74,7 @@ export default {
   },
   data() {
     return {
+      categories:null,
       mainPhoto: null,
       post: {
         title: null, // required
@@ -182,6 +185,11 @@ export default {
       this.mainPhoto = $event.target.files[0];
       console.log(this.mainPhoto);
     }
+  },
+  async beforeCreate() {
+    const category = await HTTP.get(`/category`);
+    // console.log(category.data.data.categories);
+    this.categories = category.data.data.categories;
   }
 
 }
@@ -195,7 +203,7 @@ export default {
 form{
   // background-color: gray;
   background-color: rgba(238, 238, 238, 0.486);
-  width: 70%;
+  width: 70vw;
   margin: 0 auto;
   font-size: 1.3rem;
   padding-bottom: 1rem;
@@ -205,27 +213,49 @@ form{
   }
 
   input{
-  padding: .7rem 1.5rem;
-  border-radius: 2px;
-  border: 2px solid $color-primary;
-  background-color: rgba(white, 0.8);
-  display: block;
+    padding: .7rem 1.5rem;
+    border-radius: 2px;
+    border: 2px solid $color-primary;
+    background-color: rgba(white, 0.8);
+    display: block;
 
-  &:focus{
-    outline: none;
-    border:none;
-    box-shadow: 0 1rem 2rem rgba(black, 0.1);
-    border-bottom: 3px solid $color-primary;
+    &:focus{
+      outline: none;
+      border:none;
+      box-shadow: 0 1rem 2rem rgba(black, 0.1);
+      border-bottom: 3px solid $color-primary;
+    }
+    &:invalid{
+      border:2px solid red;
+      box-shadow: none;
+    }
+    &:focus:invalid {
+      border:none;
+      border-bottom: 3px solid red;
+    }
   }
-  &:invalid{
-    border:2px solid red;
-    box-shadow: none;
+  select{
+    padding: .7rem 1.5rem;
+    border-radius: 2px;
+    border: 2px solid $color-primary;
+    background-color: rgba(white, 0.8);
+    display: block;
+
+    &:focus{
+      outline: none;
+      border:none;
+      box-shadow: 0 1rem 2rem rgba(black, 0.1);
+      border-bottom: 3px solid $color-primary;
+    }
+    &:invalid{
+      border:2px solid red;
+      box-shadow: none;
+    }
+    &:focus:invalid {
+      border:none;
+      border-bottom: 3px solid red;
+    }
   }
-  &:focus:invalid {
-    border:none;
-    border-bottom: 3px solid red;
-  }
-}
 }
 .input:not(:last-child){
   margin-bottom: 1rem;

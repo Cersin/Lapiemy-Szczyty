@@ -26,10 +26,12 @@ export default {
     }
   },
   props: ['article'],
+  methods: {
+    
+  },
   async beforeCreate() {
     const post = await HTTP.get(`articles/${this.article}`);
     this.currentPost = post.data.data.article;
-
   }
 }
 </script>
