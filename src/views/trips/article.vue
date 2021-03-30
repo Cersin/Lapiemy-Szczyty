@@ -16,7 +16,7 @@
         <div class="description-map" v-html="currentPost.map"></div>
       </div>
 
-      <div class="content" v-html="currentPost.content"></div>
+      <div class="ck-content" v-html="currentPost.content"></div>
     </div>
   </div>
 
@@ -44,6 +44,9 @@ export default {
 
 <style lang="scss">
 @import "src/styles/abstract/variables";
+@import "src/styles/components/post";
+@import "~vue-wysiwyg/dist/vueWysiwyg.css";
+
 
 .full-article {
   width: 100%;
@@ -54,12 +57,15 @@ export default {
 .post {
   display: flex;
   flex-direction: column;
-  width: 70vw;
+  width: 55vw;
 
-  @media only screen and (max-width: 600px) {
-    width: 100%;
+  @media only screen and (max-width: 1600px) {
+    width: 60vw;
   }
 
+  @media only screen and (max-width: 900px) {
+    width: 100%;
+  }
 }
 
 .mainPhoto {
@@ -131,20 +137,5 @@ export default {
   }
 }
 
-.content {
-
-  figure {
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  img {
-    max-width: 100%;
-
-  }
-}
-
-img {
-}
 
 </style>

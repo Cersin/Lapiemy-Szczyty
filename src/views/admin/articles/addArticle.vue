@@ -13,8 +13,8 @@
 
       <div class="input">
         <label for="category">Kategoria</label>
-        <select id="category" name="category">
-          <option v-for="(category, i) in categories" v-bind:key="i" value="category.name">{{category.name}}</option>
+        <select v-model="post.category" id="category"  name="category">
+          <option v-for="(category, i) in categories" v-bind:key="i" :value="category.name">{{category.name}}</option>
         </select>
       </div>
 
