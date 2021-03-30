@@ -1,14 +1,14 @@
 <template>
-  <div class="content">
-    <div class="article" v-if="currentPost">
+  <div class="full-article">
+    <div class="post" v-if="currentPost">
 
       <div class="mainPhoto">
         <img :src="currentPost.mainPhoto" alt="Main Photo">
       </div>
 
       <div class="mapa-turystyczna" v-html="currentPost.map"></div>
-
-      <div class="article" v-html="currentPost.content"></div>
+     
+      <div class="content" v-html="currentPost.content"></div>
     </div>
   </div>
 
@@ -26,22 +26,24 @@ export default {
     }
   },
   props: ['article'],
+  methods: {
+    
+  },
   async beforeCreate() {
     const post = await HTTP.get(`articles/${this.article}`);
     this.currentPost = post.data.data.article;
-
   }
 }
 </script>
 
-<style lang="scss" scoped>
-.content {
+<style lang="scss">
+.full-article {
   width: 100vw;
   display: flex;
   justify-content: center;
 }
 
-.article {
+.post {
   display: flex;
   flex-direction: column;
   width: 70vw;
@@ -52,9 +54,8 @@ img {
   height: auto;
 }
 
-.article {
+.content {
   width: 70vw;
-
 }
 
 figure {
