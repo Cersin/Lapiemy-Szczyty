@@ -8,7 +8,7 @@
 
       <div class="input">
         <label for="description">Opis</label>
-        <input id="description" v-model="post.description" type="text">
+        <input id="description" v-model="post.description" type="text" required>
       </div>
 
       <div class="input">
@@ -25,7 +25,7 @@
 
       <div class="input">
         <label for="tripDate">Data wycieczki</label>
-        <input id="tripDate" v-model="post.tripDate" type="date">
+        <input id="tripDate" v-model="post.tripDate" placeholder="Data wycieczki" type="date">
       </div>
 
       <div class="input">
@@ -44,7 +44,11 @@
       </div>
 
       <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
-      <button @click.prevent="addPost()">Add test</button>
+      <!-- <button @click.prevent="addPost()">Dodaj artykuł</button> -->
+      <button class="article__button" @click.prevent="addPost()">
+            <span class="article__button-polygon"></span>
+            <span class="article__button-text">Dodaj artykuł</span>
+        </button>
     </form>
     <!--  <div class="ck-content">-->
     <!--    {{temporaryPost}}-->
@@ -187,8 +191,80 @@ export default {
 
 <style lang="scss" scoped>
 @import "~vue-wysiwyg/dist/vueWysiwyg.css";
+@import "src/styles/abstract/variables";
+form{
+  // background-color: gray;
+  background-color: rgba(238, 238, 238, 0.486);
+  width: 70%;
+  margin: 0 auto;
+  font-size: 1.3rem;
+  padding-bottom: 1rem;
 
-.ck-content p {
-  color: red;
+  label{
+    font-size: 1.5rem;
+  }
+
+  input{
+  padding: .7rem 1.5rem;
+  border-radius: 2px;
+  border: 2px solid $color-primary;
+  background-color: rgba(white, 0.8);
+  display: block;
+
+  &:focus{
+    outline: none;
+    border:none;
+    box-shadow: 0 1rem 2rem rgba(black, 0.1);
+    border-bottom: 3px solid $color-primary;
+  }
+  &:invalid{
+    border:2px solid red;
+    box-shadow: none;
+  }
+  &:focus:invalid {
+    border:none;
+    border-bottom: 3px solid red;
+  }
+}
+}
+.input:not(:last-child){
+  margin-bottom: 1rem;
+}
+
+.article__button {
+  border:none ;
+  display: flex;
+  padding: .5rem;
+  box-shadow: 0 0.5rem 1rem rgba(black, 0.2);
+  font-family: "Comic Sans MS", sans-serif;
+  cursor: pointer;
+  transition: all .3s;
+  margin: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  &:hover {
+    background-color: $color-grey-light;
+  }
+
+  &:active {
+    background-color: darken($color-grey-light, 10);
+  }
+
+  &-polygon{
+    background-color: $color-secondary;
+    // clip-path: polygon(0% 0%, 80% 0%, 100% 100%, 0% 100%);
+    clip-path: polygon(0% 100%, 25% 30%, 40% 60%,60% 10%, 100% 100%, 0% 100%);
+    width: 2.5rem;
+    height: 2.5rem;    
+    }
+
+  &-text {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    align-self: flex-end;
+    color: $color-secondary-darker;
+    font-weight: 700;
+    font-size: 1.4rem;
+  }
 }
 </style>
