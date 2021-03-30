@@ -13,13 +13,8 @@
 
       <div class="input">
         <label for="category">Kategoria</label>
-<<<<<<< HEAD
-        <select id="category" name="category" required>
-          <option v-for="(category, i) in categories" v-bind:key="i" value="category.name">{{category.name}}</option>
-=======
         <select v-model="post.category" id="category" name="category">
           <option v-for="(category, i) in categories" v-bind:key="i" :value="category.name">{{ category.name }}</option>
->>>>>>> 44df7f017a0d268749cddfc7f420c102ad4ded3d
         </select>
       </div>
 
@@ -66,15 +61,9 @@
 
       <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
       <!-- <button @click.prevent="addPost()">Dodaj artykuł</button> -->
-<<<<<<< HEAD
       <button class="article__button" type="submit">
             <span class="article__button-polygon"></span>
             <span class="article__button-text">Dodaj artykuł</span>
-=======
-      <button class="article__button" @click.prevent="addPost()">
-        <span class="article__button-polygon"></span>
-        <span class="article__button-text">Dodaj artykuł</span>
->>>>>>> 44df7f017a0d268749cddfc7f420c102ad4ded3d
       </button>
     </form>
   </div>
@@ -264,12 +253,8 @@ form {
     margin: auto;
   }
 
-<<<<<<< HEAD
   input, select{
     width: 20vw;
-=======
-  input {
->>>>>>> 44df7f017a0d268749cddfc7f420c102ad4ded3d
     padding: .7rem 1.5rem;
     border-radius: 2px;
     border: 2px solid $color-primary;
@@ -277,60 +262,18 @@ form {
     background-color: rgba(white, 0.8);
     display: block;
 
-<<<<<<< HEAD
     &:required{
       box-shadow: none;
     }
-=======
-    &:focus {
-      outline: none;
-      border: none;
-      box-shadow: 0 1rem 2rem rgba(black, 0.1);
-      border-bottom: 3px solid $color-primary;
-    }
-
-    &:invalid {
-      border: 2px solid red;
-      box-shadow: none;
-    }
-
-    &:focus:invalid {
-      border: none;
-      border-bottom: 3px solid red;
-    }
-  }
-
-  select {
-    padding: .7rem 1.5rem;
-    border-radius: 2px;
-    border: 2px solid $color-primary;
-    background-color: rgba(white, 0.8);
-    display: block;
->>>>>>> 44df7f017a0d268749cddfc7f420c102ad4ded3d
 
     &:focus {
       outline: none;
-<<<<<<< HEAD
       border: 2px solid transparent;
       box-shadow: 0 1rem 1.5rem rgba(black, 0.2);
       border-bottom: 3px solid $color-primary;
     }
     &:focus:invalid {
       border: 2px solid transparent;
-=======
-      border: none;
-      box-shadow: 0 1rem 2rem rgba(black, 0.1);
-      border-bottom: 3px solid $color-primary;
-    }
-
-    &:invalid {
-      border: 2px solid red;
-      box-shadow: none;
-    }
-
-    &:focus:invalid {
-      border: none;
->>>>>>> 44df7f017a0d268749cddfc7f420c102ad4ded3d
       border-bottom: 3px solid red;
     }
   }
