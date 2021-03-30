@@ -1,6 +1,6 @@
 <template>
-  <div class="content">
-    <div class="article" v-if="currentPost">
+  <div class="full-article">
+    <div class="post" v-if="currentPost">
 
       <div class="mainPhoto">
         <img :src="currentPost.mainPhoto" alt="Main Photo">
@@ -8,7 +8,7 @@
 
       <div class="mapa-turystyczna" v-html="currentPost.map"></div>
 
-      <div class="article" v-html="currentPost.content"></div>
+      <div class="content" v-html="currentPost.content"></div>
     </div>
   </div>
 
@@ -34,30 +34,42 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.content {
+<style lang="scss">
+.full-article {
   width: 100vw;
   display: flex;
   justify-content: center;
 }
 
-.article {
+.post {
   display: flex;
   flex-direction: column;
   width: 70vw;
 }
 
+.mainPhoto {
+  display: flex;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.content {
+
+  figure {
+    margin: 0 auto;
+    text-align: center;
+  }
+  img {
+    max-width: 100%;
+
+  }
+}
+
 img {
-  width: 100%;
-  height: auto;
 }
 
-.article {
-  width: 70vw;
-
-}
-
-figure {
-  width: 100px;
-}
 </style>
