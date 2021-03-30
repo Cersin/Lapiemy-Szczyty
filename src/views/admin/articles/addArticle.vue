@@ -1,9 +1,9 @@
 <template>
   <div>
-    <form>
+    <form action="addPost()">
       <div class="input">
         <label for="title">Tytuł</label>
-        <input id="title" v-model="post.title" type="text">
+        <input id="title" v-model="post.title" type="text" required minlength="3">
       </div>
 
       <div class="input">
@@ -13,7 +13,7 @@
 
       <div class="input">
         <label for="category">Kategoria</label>
-        <select id="category" name="category">
+        <select id="category" name="category" required>
           <option v-for="(category, i) in categories" v-bind:key="i" value="category.name">{{category.name}}</option>
         </select>
       </div>
@@ -27,7 +27,7 @@
 
       <div class="input">
         <label for="tripDate">Data wycieczki</label>
-        <input id="tripDate" v-model="post.tripDate" placeholder="Data wycieczki" type="date">
+        <input id="tripDate" v-model="post.tripDate" placeholder="Data wycieczki" type="date" required>
       </div>
 
       <div class="input">
@@ -47,15 +47,11 @@
 
       <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
       <!-- <button @click.prevent="addPost()">Dodaj artykuł</button> -->
-      <button class="article__button" @click.prevent="addPost()">
+      <button class="article__button" type="submit">
             <span class="article__button-polygon"></span>
             <span class="article__button-text">Dodaj artykuł</span>
-        </button>
+      </button>
     </form>
-    <!--  <div class="ck-content">-->
-    <!--    {{temporaryPost}}-->
-    <!--    <h2>Content of the editor.</h2><p>&nbsp;</p><h4>coś jeszcze</h4>-->
-    <!--  </div>-->
   </div>
 </template>
 
@@ -150,14 +146,6 @@ export default {
             Authorization: `Bearer ${localStorage.getItem("token")}`
           }
         }
-
-        // heading: {
-        //     options: [
-        //         { model: 'paragraph', title: 'Paragraf', class: 'ck-heading_paragraph' },
-        //         { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-        //         { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
-        //     ]
-        // },
       }
     }
   },
@@ -210,49 +198,30 @@ form{
 
   label{
     font-size: 1.5rem;
+    margin: auto;
   }
 
-  input{
+  input, select{
+    width: 20vw;
     padding: .7rem 1.5rem;
     border-radius: 2px;
     border: 2px solid $color-primary;
+    border-bottom: 3px solid $color-primary;
     background-color: rgba(white, 0.8);
     display: block;
 
-    &:focus{
-      outline: none;
-      border:none;
-      box-shadow: 0 1rem 2rem rgba(black, 0.1);
-      border-bottom: 3px solid $color-primary;
-    }
-    &:invalid{
-      border:2px solid red;
+    &:required{
       box-shadow: none;
     }
-    &:focus:invalid {
-      border:none;
-      border-bottom: 3px solid red;
-    }
-  }
-  select{
-    padding: .7rem 1.5rem;
-    border-radius: 2px;
-    border: 2px solid $color-primary;
-    background-color: rgba(white, 0.8);
-    display: block;
 
     &:focus{
       outline: none;
-      border:none;
-      box-shadow: 0 1rem 2rem rgba(black, 0.1);
+      border: 2px solid transparent;
+      box-shadow: 0 1rem 1.5rem rgba(black, 0.2);
       border-bottom: 3px solid $color-primary;
     }
-    &:invalid{
-      border:2px solid red;
-      box-shadow: none;
-    }
     &:focus:invalid {
-      border:none;
+      border: 2px solid transparent;
       border-bottom: 3px solid red;
     }
   }
