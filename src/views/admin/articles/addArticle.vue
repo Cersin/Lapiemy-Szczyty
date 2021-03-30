@@ -13,9 +13,28 @@
 
       <div class="input">
         <label for="category">Kategoria</label>
+<<<<<<< HEAD
         <select id="category" name="category" required>
           <option v-for="(category, i) in categories" v-bind:key="i" value="category.name">{{category.name}}</option>
+=======
+        <select v-model="post.category" id="category" name="category">
+          <option v-for="(category, i) in categories" v-bind:key="i" :value="category.name">{{ category.name }}</option>
+>>>>>>> 44df7f017a0d268749cddfc7f420c102ad4ded3d
         </select>
+      </div>
+
+      <div class="add-category">
+        <button @click.prevent="isAddingCategory = !isAddingCategory">Dodaj kategorię</button>
+        <div v-if="isAddingCategory" class="add-category-active">
+          <label for="newCategory">Kategoria</label>
+          <input id="newCategory" v-model="newCategory" type="text" required>
+
+          <label for="categoryPhoto">Zdjęcie kategorii</label>
+          <input type="file" ref="categoryPhoto"
+                 id="categoryPhoto" name="categoryPhoto"
+                 accept="image/png, image/jpeg, image/jpg" @change="categoryFileUpload($event)">
+          <button class="article__button" @click.prevent="addCategory()">Dodaj</button>
+        </div>
       </div>
 
       <div class="input">
@@ -47,9 +66,15 @@
 
       <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
       <!-- <button @click.prevent="addPost()">Dodaj artykuł</button> -->
+<<<<<<< HEAD
       <button class="article__button" type="submit">
             <span class="article__button-polygon"></span>
             <span class="article__button-text">Dodaj artykuł</span>
+=======
+      <button class="article__button" @click.prevent="addPost()">
+        <span class="article__button-polygon"></span>
+        <span class="article__button-text">Dodaj artykuł</span>
+>>>>>>> 44df7f017a0d268749cddfc7f420c102ad4ded3d
       </button>
     </form>
   </div>
@@ -70,8 +95,11 @@ export default {
   },
   data() {
     return {
-      categories:null,
+      isAddingCategory: false,
+      newCategory: null,
+      categories: null,
       mainPhoto: null,
+      categoryPhoto: null,
       post: {
         title: null, // required
         description: null, // required
@@ -151,27 +179,61 @@ export default {
   },
   methods: {
     async addPost() {
-        let formData = new FormData();
-        formData.append('upload', this.mainPhoto);
-      try {
-        const imageRespond = await HTTP.post('image/send', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        });
-        await this.$store.dispatch('articles/sendPost', {
-          post: this.post,
-          content: this.editorData,
-          mainPhoto: imageRespond.data.url
-        });
-      } catch (e) {
-        console.log(e.message);
-        console.log(e.response.data.message);
+      let formData = new FormData();
+      formData.append('upload', this.mainPhoto);
+      if (this.mainPhoto) {
+        try {
+          const imageRespond = await HTTP.post('image/send', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          });
+          await this.$store.dispatch('articles/sendPost', {
+            post: this.post,
+            content: this.editorData,
+            mainPhoto: imageRespond.data.url
+          });
+        } catch (e) {
+          console.log(e.message);
+          console.log(e.response.data.message);
+        }
+      } else {
+        console.log('Nie dodałeś zdj');
       }
+
     },
     onFileUpload($event) {
       this.mainPhoto = $event.target.files[0];
       console.log(this.mainPhoto);
+    },
+    categoryFileUpload($event) {
+      this.categoryPhoto = $event.target.files[0];
+      console.log(this.categoryPhoto);
+    },
+    async addCategory() {
+      let formData = new FormData();
+      formData.append('upload', this.categoryPhoto);
+      if (this.categoryPhoto) {
+        try {
+          const imageRespond = await HTTP.post('image/send', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          });
+          const category = await HTTP.post(`/category`, {
+            name: this.newCategory,
+            photo: imageRespond.data.url
+          });
+          this.categories.push(category.data.category);
+          this.isAddingCategory = false;
+        } catch (e) {
+          console.log(e.message);
+          console.log(e.response.data.message);
+        }
+      } else {
+        console.log('Nie dodałeś zdj');
+      }
+
     }
   },
   async beforeCreate() {
@@ -188,7 +250,8 @@ export default {
 <style lang="scss" scoped>
 @import "~vue-wysiwyg/dist/vueWysiwyg.css";
 @import "src/styles/abstract/variables";
-form{
+
+form {
   // background-color: gray;
   background-color: rgba(238, 238, 238, 0.486);
   width: 70vw;
@@ -196,13 +259,17 @@ form{
   font-size: 1.3rem;
   padding-bottom: 1rem;
 
-  label{
+  label {
     font-size: 1.5rem;
     margin: auto;
   }
 
+<<<<<<< HEAD
   input, select{
     width: 20vw;
+=======
+  input {
+>>>>>>> 44df7f017a0d268749cddfc7f420c102ad4ded3d
     padding: .7rem 1.5rem;
     border-radius: 2px;
     border: 2px solid $color-primary;
@@ -210,28 +277,71 @@ form{
     background-color: rgba(white, 0.8);
     display: block;
 
+<<<<<<< HEAD
     &:required{
       box-shadow: none;
     }
-
-    &:focus{
+=======
+    &:focus {
       outline: none;
+      border: none;
+      box-shadow: 0 1rem 2rem rgba(black, 0.1);
+      border-bottom: 3px solid $color-primary;
+    }
+
+    &:invalid {
+      border: 2px solid red;
+      box-shadow: none;
+    }
+
+    &:focus:invalid {
+      border: none;
+      border-bottom: 3px solid red;
+    }
+  }
+
+  select {
+    padding: .7rem 1.5rem;
+    border-radius: 2px;
+    border: 2px solid $color-primary;
+    background-color: rgba(white, 0.8);
+    display: block;
+>>>>>>> 44df7f017a0d268749cddfc7f420c102ad4ded3d
+
+    &:focus {
+      outline: none;
+<<<<<<< HEAD
       border: 2px solid transparent;
       box-shadow: 0 1rem 1.5rem rgba(black, 0.2);
       border-bottom: 3px solid $color-primary;
     }
     &:focus:invalid {
       border: 2px solid transparent;
+=======
+      border: none;
+      box-shadow: 0 1rem 2rem rgba(black, 0.1);
+      border-bottom: 3px solid $color-primary;
+    }
+
+    &:invalid {
+      border: 2px solid red;
+      box-shadow: none;
+    }
+
+    &:focus:invalid {
+      border: none;
+>>>>>>> 44df7f017a0d268749cddfc7f420c102ad4ded3d
       border-bottom: 3px solid red;
     }
   }
 }
-.input:not(:last-child){
+
+.input:not(:last-child) {
   margin-bottom: 1rem;
 }
 
 .article__button {
-  border:none ;
+  border: none;
   display: flex;
   padding: .5rem;
   box-shadow: 0 0.5rem 1rem rgba(black, 0.2);
@@ -241,6 +351,7 @@ form{
   margin: auto;
   margin-top: 1rem;
   margin-bottom: 1rem;
+
   &:hover {
     background-color: $color-grey-light;
   }
@@ -249,13 +360,13 @@ form{
     background-color: darken($color-grey-light, 10);
   }
 
-  &-polygon{
+  &-polygon {
     background-color: $color-secondary;
     // clip-path: polygon(0% 0%, 80% 0%, 100% 100%, 0% 100%);
-    clip-path: polygon(0% 100%, 25% 30%, 40% 60%,60% 10%, 100% 100%, 0% 100%);
+    clip-path: polygon(0% 100%, 25% 30%, 40% 60%, 60% 10%, 100% 100%, 0% 100%);
     width: 2.5rem;
-    height: 2.5rem;    
-    }
+    height: 2.5rem;
+  }
 
   &-text {
     margin-left: 1rem;
@@ -264,6 +375,22 @@ form{
     color: $color-secondary-darker;
     font-weight: 700;
     font-size: 1.4rem;
+  }
+}
+
+.add-category {
+  label {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  &-active {
+    display: flex;
+    flex-direction: column;
+    background-color: $color-secondary;
+    width: 20vw;
+    margin: 1rem 0;
+    padding: 1rem;
   }
 }
 </style>
