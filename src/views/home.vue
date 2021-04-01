@@ -43,7 +43,8 @@ export default {
 .home {
   min-height: 100%;
   display: grid;
-  grid-template-rows: 20vw 1fr repeat(2, min-content);
+  width: 80%;
+  margin: 0 auto;
 }
 
 .articles {
@@ -52,7 +53,7 @@ export default {
   grid-gap: 3rem;
   padding: 2rem 0;
   justify-self: center;
-  width: 70%;
+  width: 100%;
 
   @media only screen and (max-width: 700px) {
     width: 100%;
