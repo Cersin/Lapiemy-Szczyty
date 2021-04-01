@@ -8,7 +8,7 @@ import about from "@/views/about";
 import desktop from "@/views/admin/desktop";
 import login from "@/views/admin/login";
 import list from "@/views/admin/articles/list";
-import editArticle from "@/views/admin/articles/editArticle";
+// import editArticle from "@/views/admin/articles/editArticle";
 import addArticle from "@/views/admin/articles/addArticle";
 import listCategory from "@/views/admin/categories/listCategory";
 import editCategory from "@/views/admin/categories/editCategory";
@@ -25,7 +25,7 @@ const routes = [
     {path: '/admin', component: desktop, meta: {requiresLogin: true}},
     {path: '/admin/login', component: login},
     {path: '/admin/articles', component: list, meta: {requiresLogin: true}},
-    {path: '/admin/articles/:article/edit', component: editArticle, meta: {requiresLogin: true}, props: true},
+    {path: '/admin/articles/edit', component: addArticle, name:'editArticle', meta: {requiresLogin: true}, props:true},
     {path: '/admin/articles/add', component: addArticle, meta: {requiresLogin: true}},
     {path: '/admin/category', component: listCategory, meta: {requiresLogin: true}},
     {path: '/admin/category/:category/edit', component: editCategory, meta: {requiresLogin: true}, props: true},

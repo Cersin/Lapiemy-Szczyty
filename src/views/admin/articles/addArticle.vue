@@ -61,7 +61,7 @@
 
       <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
       <!-- <button @click.prevent="addPost()">Dodaj artykuł</button> -->
-      <button class="article__button" type="submit">
+      <button class="article__button" @click.prevent="addPost()">
             <span class="article__button-polygon"></span>
             <span class="article__button-text">Dodaj artykuł</span>
       </button>
@@ -84,6 +84,7 @@ export default {
   },
   data() {
     return {
+      editableArticle:null,
       isAddingCategory: false,
       newCategory: null,
       categories: null,
@@ -229,6 +230,18 @@ export default {
     const category = await HTTP.get(`/category`);
     // console.log(category.data.data.categories);
     this.categories = category.data.data.categories;
+    this.editableArticle = this.$route.params;
+    this.post.title = this.editableArticle.title;
+    this.post.description = this.editableArticle.description;
+    this.post.category = this.editableArticle.category;
+    this.post.tripDate = this.editableArticle.tripDate;
+    this.post.duration = this.editableArticle.duration;
+    this.post.distance = this.editableArticle.distance;
+    this.post.map = this.editableArticle.map;
+    this.editorData = this.editableArticle.content;
+
+    console.log(this.post.tripDate)
+    
   }
 
 }
@@ -333,7 +346,7 @@ form {
     background-color: $color-secondary;
     width: 20vw;
     margin: 1rem 0;
-    padding: 1rem;
+    padding: 1rem 0;
   }
 }
 </style>
