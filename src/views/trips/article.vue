@@ -2,10 +2,6 @@
   <div class="full-article">
     <div class="post" v-if="currentPost">
 
-      <div class="mainPhoto">
-        <img :src="currentPost.mainPhoto" alt="Main Photo">
-      </div>
-
       <div class="description">
         <div class="description__details">
           <p class="description__details-title">{{ currentPost.title }}</p>
@@ -13,10 +9,13 @@
           <p class="description__details-category">{{ currentPost.category }}</p>
           <p class="description__details-distance">Dystans:{{ currentPost.distance }}km</p>
         </div>
-        <div class="description-map" v-html="currentPost.map"></div>
+        <div class="mainPhoto">
+          <img :src="currentPost.mainPhoto" alt="Main Photo">
+        </div>
       </div>
 
       <div class="ck-content" v-html="currentPost.content"></div>
+      <div class="description-map" v-html="currentPost.map"></div>
     </div>
   </div>
 
@@ -52,6 +51,7 @@ export default {
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 5rem;
 }
 
 .post {
@@ -73,8 +73,9 @@ export default {
   justify-content: center;
 
   img {
-    max-width: 100%;
+    max-width: 30vw;
     height: auto;
+    border-radius: 10px;
   }
 }
 
@@ -83,6 +84,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   letter-spacing: .2rem;
+  margin-bottom: 5rem;
 
   @media only screen and (max-width: 860px) {
     flex-direction: column;
@@ -124,15 +126,10 @@ export default {
   }
 
   &-map {
-    width: 50%;
-
-    @media only screen and (max-width: 860px) {
-      width: 100%;
-    }
-
 
     iframe {
-      height: 50vh;
+      height: 40vh;
+      margin-top: 5rem;
     }
   }
 }
