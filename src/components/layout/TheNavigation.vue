@@ -106,7 +106,7 @@ nav {
   justify-content: space-evenly;
 
   &-element {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     margin-right: 3rem;
     color: inherit;
     text-decoration: none;

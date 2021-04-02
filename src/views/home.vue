@@ -42,21 +42,16 @@ export default {
 <style lang="scss" scoped>
 .home {
   min-height: 100%;
-  display: grid;
   width: 80%;
   margin: 0 auto;
+
 }
 
 .articles {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 3rem;
   padding: 2rem 0;
-  justify-self: center;
   width: 100%;
-
-  @media only screen and (max-width: 700px) {
-    width: 100%;
-  }
 }
 </style>
