@@ -108,6 +108,13 @@ export default {
       border: none;
       border-radius: 0 0 22px 0;
       margin-top: 2rem;
+      transition: all 1s;
+      cursor: pointer;
+
+      &:hover {
+        background-color: darken($color-secondary, 5);
+        border-radius: 22px 0;
+      }
     }
   }
 }
