@@ -47,7 +47,6 @@ nav {
 
 //// Stylizacja logo /////
 .logo {
-  font-family: "Open Sans", sans-serif;
   margin-left: 8vw;
   width: 30%;
   padding: .2rem 1rem;
@@ -62,7 +61,7 @@ nav {
   }
 
   &-text {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 600;
     letter-spacing: 3px;
     transition: all .7s ease-in;
@@ -76,7 +75,7 @@ nav {
 
   &-icon {
     font-size: 4.5rem;
-    margin-right: .7rem;
+    margin-right: 1rem;
     color: $color-secondary;
     transition: all 1.5s;
     transition-delay: .8s;
@@ -106,7 +105,8 @@ nav {
   justify-content: space-evenly;
 
   &-element {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
+    font-weight: 500;
     margin-right: 3rem;
     color: inherit;
     text-decoration: none;

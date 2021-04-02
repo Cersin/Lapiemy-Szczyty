@@ -61,21 +61,22 @@ export default {
     flex-direction: column;
 
     &-title {
-      font-weight: 00;
-      font-size: 2rem;
+      font-weight: 500;
+      font-size: 1.7rem;
       letter-spacing: 1px;
     }
 
     &-category {
       color: $color-secondary;
+      font-weight: 500;
       font-size: 1.1rem;
     }
 
     &-distance {
-      font-size: 1.1rem;
       margin-top: .2rem;
-      font-weight: 600;
-      color: rgba(0, 0, 0, 0.5);
+      opacity: .7;
+      font-weight: 500;
+      font-size: 1.1rem;
     }
 
     &-description {
@@ -90,9 +91,10 @@ export default {
 
     &-date {
       font-size: 1.1rem;
+      opacity: .7;
+      font-style: normal;
       text-transform: uppercase;
-      font-weight: 600;
-      color: rgba(0, 0, 0, 0.3);
+      font-weight: 500;
     }
 
     &-button {
@@ -100,6 +102,8 @@ export default {
       color: white;
       align-self: flex-end;
       padding: 1.3rem 4rem;
+      letter-spacing: .06rem;
+      font-weight: 600;
       background-color: $color-secondary;
       border: none;
       border-radius: 0 0 22px 0;

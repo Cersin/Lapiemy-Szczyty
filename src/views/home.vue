@@ -49,7 +49,7 @@ export default {
 
 .articles {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   grid-gap: 3rem;
   padding: 2rem 0;
   width: 100%;
