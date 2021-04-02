@@ -23,7 +23,7 @@ export default {
         if (context.state.articles) {
             return;
         }
-        const posts = await HTTP.get('articles?skip=0&limit=4');
+        const posts = await HTTP.get('articles?skip=0&limit=6');
         await context.commit('setPosts', {
             articles: posts.data.data.articles
         });

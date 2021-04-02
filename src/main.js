@@ -1,15 +1,16 @@
-import { createApp } from 'vue';
+import {createApp} from 'vue';
 import App from './App.vue';
 import './registerServiceWorker';
 import router from './router';
 import store from './store';
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faPaw } from "@fortawesome/free-solid-svg-icons";
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {faPaw, faMapMarkerAlt, faMountain, faHiking} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+
 const moment = require('moment');
 import 'moment/locale/pl';
 
-library.add(faPaw);
+library.add(faPaw, faMapMarkerAlt, faMountain, faHiking);
 
 const app = createApp(App);
 

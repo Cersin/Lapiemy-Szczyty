@@ -8,7 +8,7 @@
       <p class="card__box-category">{{ category }}</p>
       <p class="card__box-distance">Dystans: {{ distance }}km</p>
       <!--      <p class="card__box-description">{{ description }}</p>-->
-      <button @click="goToArticle()" class="card__box-button">Zobacz</button>
+      <button @click="goToArticle()" class="button-green card__box-button">Zobacz</button>
     </div>
 
 
@@ -98,23 +98,8 @@ export default {
     }
 
     &-button {
-      font-size: 1.5rem;
-      color: white;
-      align-self: flex-end;
-      padding: 1.3rem 4rem;
-      letter-spacing: .06rem;
-      font-weight: 600;
-      background-color: $color-secondary;
-      border: none;
-      border-radius: 0 0 22px 0;
       margin-top: 2rem;
-      transition: all 1s;
-      cursor: pointer;
-
-      &:hover {
-        background-color: darken($color-secondary, 5);
-        border-radius: 22px 0;
-      }
+      align-self: flex-end;
     }
   }
 }
