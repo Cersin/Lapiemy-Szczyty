@@ -76,7 +76,11 @@ export default {
     }
   },
   async beforeCreate() {
-    this.$store.dispatch('articles/getFourArticles');
+    this.$store.dispatch('articles/getArticles', {
+      change: false,
+      skip: 0,
+      limit: 6
+    });
     this.$store.dispatch('categories/getCategories');
   },
   computed: {
@@ -87,9 +91,15 @@ export default {
   },
   methods: {
     search() {
-      console.log(this.country);
-      console.log(this.mountains);
-      console.log(this.distance);
+      console.log('execute');
+      this.$store.dispatch('articles/getArticles', {
+        change: true,
+        skip: 0,
+        limit: 6,
+        country: this.country,
+        mountains: this.mountains,
+        distance: this.distance
+      });
     }
   }
 }

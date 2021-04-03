@@ -4,5 +4,8 @@ export default {
     },
     setArticle(state, payload) {
         state.articlesCategory = payload.articles
+    },
+    setUrl(state, payload) {
+        state.url = payload.url;
     }
 }

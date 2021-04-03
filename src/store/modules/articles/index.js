@@ -7,7 +7,8 @@ export default {
     state() {
         return {
             articles: null,
-            articlesCategory: null
+            articlesCategory: null,
+            url: null
         }
     },
     mutations: mutations,
