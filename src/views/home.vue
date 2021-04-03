@@ -23,7 +23,10 @@
           <select v-model="mountains">
             <option disabled value="">Wybierz góry</option>
             <option value="">Wszystkie</option>
-            <option :value="`&category=${category.name}`" v-for="(category, i) in categories" :key="i">{{ category.name }}</option>
+            <option :value="`&category=${category.name}`" v-for="(category, i) in categories" :key="i">{{
+                category.name
+              }}
+            </option>
           </select>
         </div>
 
@@ -91,7 +94,6 @@ export default {
   },
   methods: {
     search() {
-      console.log('execute');
       this.$store.dispatch('articles/getArticles', {
         change: true,
         skip: 0,
