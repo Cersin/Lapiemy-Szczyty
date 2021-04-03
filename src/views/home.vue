@@ -9,9 +9,9 @@
         </span>
           <select v-model="country">
             <option disabled value="">Wybierz kraj</option>
-            <option>Wszystkie</option>
-            <option>Polska</option>
-            <option>Za granicą</option>
+            <option value="">Wszystkie</option>
+            <option value="&country=Polska">Polska</option>
+            <option value="&country=Za_Granica">Za granicą</option>
           </select>
         </div>
 
@@ -22,8 +22,8 @@
         </span>
           <select v-model="mountains">
             <option disabled value="">Wybierz góry</option>
-            <option>Wszystkie</option>
-            <option v-for="(category, i) in categories" :key="i">{{ category.name }}</option>
+            <option value="">Wszystkie</option>
+            <option :value="`&category=${category.name}`" v-for="(category, i) in categories" :key="i">{{ category.name }}</option>
           </select>
         </div>
 
@@ -34,15 +34,15 @@
         </span>
           <select v-model="distance">
             <option disabled value="">Wybierz dystans</option>
-            <option>Wszystkie</option>
-            <option>do 5km</option>
-            <option>5 do 10km</option>
-            <option>powyżej 10km</option>
+            <option value="">Wszystkie</option>
+            <option value="&distance[lte]=5">do 5km</option>
+            <option value="&distance[gt]=5&distance[lte]=10">5 do 10km</option>
+            <option value="$distance[gt]=10">powyżej 10km</option>
           </select>
         </div>
       </div>
 
-      <button class="button-green">Szukaj</button>
+      <button @click="search()" class="button-green">Szukaj</button>
 
     </div>
 
@@ -56,7 +56,6 @@
             :description=article.description
             :tripTime="article.tripDate"
             :mainPhoto="article.mainPhoto"
-
       ></card>
     </div>
   </div>
@@ -71,9 +70,9 @@ export default {
   components: {Card},
   data() {
     return {
-      country: 'Wszystkie',
-      mountains: 'Wszystkie',
-      distance: 'Wszystkie'
+      country: '',
+      mountains: '',
+      distance: ''
     }
   },
   async beforeCreate() {
@@ -85,6 +84,13 @@ export default {
       articles: "articles/getPosts",
       categories: "categories/getCategories"
     })
+  },
+  methods: {
+    search() {
+      console.log(this.country);
+      console.log(this.mountains);
+      console.log(this.distance);
+    }
   }
 }
 </script>
