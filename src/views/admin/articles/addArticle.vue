@@ -50,8 +50,8 @@
       </div>
 
       <div class="input">
-        <label for="duration">Czas</label>
-        <input id="duration" v-model="post.duration" type="time">
+        <label for="duration">Czas wycieczki w minutach</label>
+        <input id="duration" v-model="post.duration" type="number">
       </div>
 
       <div class="input">
@@ -68,13 +68,13 @@
 
       <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
       <!-- <button @click.prevent="addPost()">Dodaj artykuł</button> -->
-      <button class="article__button" @click.prevent="addPost()" v-if="!editableArticle" >
-            <span class="article__button-polygon"></span>
-            <span class="article__button-text">Dodaj artykuł</span>
+      <button class="article__button" @click.prevent="addPost()" v-if="!editableArticle">
+        <span class="article__button-polygon"></span>
+        <span class="article__button-text">Dodaj artykuł</span>
       </button>
-      <button class="article__button" @click.prevent="editPost()" v-else >
-            <span class="article__button-polygon"></span>
-            <span class="article__button-text">Edytuj artykuł</span>
+      <button class="article__button" @click.prevent="editPost()" v-else>
+        <span class="article__button-polygon"></span>
+        <span class="article__button-text">Edytuj artykuł</span>
       </button>
     </form>
   </div>
@@ -95,7 +95,7 @@ export default {
   },
   data() {
     return {
-      editableArticle:null,
+      editableArticle: null,
       isAddingCategory: false,
       newCategory: null,
       categories: null,
@@ -203,14 +203,15 @@ export default {
       }
 
     },
-    async editPost(){
+    async editPost() {
       console.log("No i tutaj jesteśmy w edycji");
       console.log(this.post);
-      if(this.editableArticle.mainPhoto === this.mainPhoto){
+      if (this.editableArticle.mainPhoto === this.mainPhoto) {
         console.log("Takie samo zdjęcie główne")
         await HTTP.patch(`articles/${this.post._id}`,{
                 title: this.post.title,
                 description: this.post.description,
+                country: this.post.country,
                 category: this.post.category,
                 distance: this.post.distance,
                 mainPhoto: this.mainPhoto,
@@ -219,7 +220,8 @@ export default {
                 tripDate: this.post.tripDate,
                 map: this.post.map
             });
-            this.$router.push({path:'/'});
+            window.location = '/';
+            // this.$router.push({path:'/'});
       }else if(this.editableArticle.mainPhoto !== this.mainPhoto){
         let formData = new FormData();
         formData.append('upload', this.mainPhoto);
@@ -230,18 +232,20 @@ export default {
                 'Content-Type': 'multipart/form-data'
               }
             });
-            await HTTP.patch(`articles/${this.post._id}`,{
-                title: this.post.title,
-                description: this.post.description,
-                category: this.post.category,
-                distance: this.post.distance,
-                mainPhoto: imageRespond.data.url,
-                content: this.editorData,
-                duration: this.post.duration,
-                tripDate: this.post.tripDate,
-                map: this.post.map
+            await HTTP.patch(`articles/${this.post._id}`, {
+              title: this.post.title,
+              description: this.post.description,
+              country: this.post.country,
+              category: this.post.category,
+              distance: this.post.distance,
+              mainPhoto: imageRespond.data.url,
+              content: this.editorData,
+              duration: this.post.duration,
+              tripDate: this.post.tripDate,
+              map: this.post.map
             });
-            this.$router.push({path:'/'});
+            window.location = '/';
+            // this.$router.push({path:'/'});
           } catch (e) {
             console.log(e.message);
             console.log(e.response.data.message);
@@ -250,29 +254,29 @@ export default {
           console.log('Nie dodałeś zdj');
         }
       }
-      
+
     },
     onFileUpload($event) {
       this.mainPhoto = $event.target.files[0];
     },
     async addCategory() {
-        try {
-          const category = await HTTP.post(`/category`, {
-            name: this.newCategory
-          });
-          this.categories.push(category.data.category);
-          this.isAddingCategory = false;
-        } catch (e) {
-          console.log(e.message);
-          console.log(e.response.data.message);
-        }
+      try {
+        const category = await HTTP.post(`/category`, {
+          name: this.newCategory
+        });
+        this.categories.push(category.data.category);
+        this.isAddingCategory = false;
+      } catch (e) {
+        console.log(e.message);
+        console.log(e.response.data.message);
+      }
     },
   },
   async beforeCreate() {
     const category = await HTTP.get(`/category`);
     this.categories = category.data.data.categories;
-    
-    if(this.$route.params.title){
+
+    if (this.$route.params.title) {
       this.editableArticle = this.$route.params;
       this.post = this.editableArticle;
       this.post.tripDate = this.$filters.moment(this.editableArticle.tripDate, "YYYY-MM-DD");
@@ -302,7 +306,7 @@ form {
     margin: auto;
   }
 
-  input, select{
+  input, select {
     width: 20vw;
     padding: .7rem 1.5rem;
     border-radius: 2px;
@@ -311,7 +315,7 @@ form {
     background-color: rgba(white, 0.8);
     display: block;
 
-    &:required{
+    &:required {
       box-shadow: none;
     }
 
@@ -321,13 +325,15 @@ form {
       box-shadow: 0 1rem 1.5rem rgba(black, 0.2);
       border-bottom: 3px solid $color-primary;
     }
+
     &:focus:invalid {
       border: 2px solid transparent;
       border-bottom: 3px solid red;
     }
   }
-  
+
 }
+
 .mainPhoto {
   display: flex;
   flex-direction: column;
@@ -339,10 +345,11 @@ form {
     border-radius: 10px;
   }
 
-  button{
+  button {
     width: 10vw;
   }
 }
+
 .input:not(:last-child) {
   margin-bottom: 1rem;
 }

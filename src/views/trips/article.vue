@@ -6,7 +6,7 @@
         <div class="description__details">
           <p class="description__details-title">{{ currentPost.title }}</p>
           <p class="description__details-time">{{ $filters.moment(currentPost.tripDate, "DD MMMM YYYY") }}</p>
-          <p class="description__details-category">{{ currentPost.category }}</p>
+          <p class="description__details-category">{{ currentPost.country }}, {{ currentPost.category }}</p>
           <p class="description__details-distance">Dystans:{{ currentPost.distance }}km</p>
         </div>
         <div class="mainPhoto">

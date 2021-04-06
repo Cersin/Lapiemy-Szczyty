@@ -5,7 +5,7 @@
     <div class="card__box">
       <p class="card__box-date">{{ $filters.moment(tripTime, "DD MMMM YYYY") }}</p>
       <header class="card__box-title">{{ title }}</header>
-      <p class="card__box-category">{{ category }}</p>
+      <p class="card__box-category">{{ country }}, {{ category }}</p>
       <p class="card__box-distance">Dystans: {{ distance }}km</p>
       <!--      <p class="card__box-description">{{ description }}</p>-->
       <button @click="goToArticle()" class="button-green card__box-button">Zobacz</button>
@@ -25,7 +25,8 @@ export default {
     "distance",
     "description",
     "tripTime",
-    "mainPhoto"
+    "mainPhoto",
+    "country"
   ],
   methods: {
     goToArticle() {

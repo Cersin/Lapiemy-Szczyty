@@ -4,13 +4,13 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import {library} from "@fortawesome/fontawesome-svg-core";
-import {faPaw, faMapMarkerAlt, faMountain, faHiking} from "@fortawesome/free-solid-svg-icons";
+import {faPaw, faMapMarkerAlt, faMountain, faHiking, faEnvelope} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
 const moment = require('moment');
 import 'moment/locale/pl';
 
-library.add(faPaw, faMapMarkerAlt, faMountain, faHiking);
+library.add(faPaw, faMapMarkerAlt, faMountain, faHiking, faEnvelope);
 
 const app = createApp(App);
 
