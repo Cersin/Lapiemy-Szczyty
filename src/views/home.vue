@@ -56,6 +56,7 @@
             :title=article.title
             :category=article.category
             :distance=article.distance
+            :country="article.country"
             :description=article.description
             :tripTime="article.tripDate"
             :mainPhoto="article.mainPhoto"
