@@ -269,7 +269,6 @@ export default {
   async beforeCreate() {
     const category = await HTTP.get(`/category`);
     this.categories = category.data.data.categories;
-<<<<<<< HEAD
     
     if(this.$route.params.title){
       this.editableArticle = this.$route.params;
@@ -278,18 +277,6 @@ export default {
       this.mainPhoto = this.editableArticle.mainPhoto;
       this.editorData = this.editableArticle.content;
     }
-=======
-    this.editableArticle = this.$route.params;
-    this.post.title = this.editableArticle.title;
-    this.post.country = this.editableArticle.country;
-    this.post.description = this.editableArticle.description;
-    this.post.category = this.editableArticle.category;
-    this.post.tripDate = this.editableArticle.tripDate;
-    this.post.duration = this.editableArticle.duration;
-    this.post.distance = this.editableArticle.distance;
-    this.post.map = this.editableArticle.map;
-    this.editorData = this.editableArticle.content;
->>>>>>> 3a4c84f9da80129a174240e4caa5f7a22543de38
   }
 }
 
