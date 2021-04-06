@@ -23,11 +23,6 @@
         <div v-if="isAddingCategory" class="add-category-active">
           <label for="newCategory">Kategoria</label>
           <input id="newCategory" v-model="newCategory" type="text" required>
-
-          <label for="categoryPhoto">Zdjęcie kategorii</label>
-          <input type="file" ref="categoryPhoto"
-                 id="categoryPhoto" name="categoryPhoto"
-                 accept="image/png, image/jpeg, image/jpg" @change="categoryFileUpload($event)">
           <button class="article__button" @click.prevent="addCategory()">Dodaj</button>
         </div>
       </div>
@@ -89,7 +84,6 @@ export default {
       newCategory: null,
       categories: null,
       mainPhoto: null,
-      categoryPhoto: null,
       post: {
         title: null, // required
         description: null, // required
@@ -194,25 +188,11 @@ export default {
     },
     onFileUpload($event) {
       this.mainPhoto = $event.target.files[0];
-      console.log(this.mainPhoto);
-    },
-    categoryFileUpload($event) {
-      this.categoryPhoto = $event.target.files[0];
-      console.log(this.categoryPhoto);
     },
     async addCategory() {
-      let formData = new FormData();
-      formData.append('upload', this.categoryPhoto);
-      if (this.categoryPhoto) {
         try {
-          const imageRespond = await HTTP.post('image/send', formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          });
           const category = await HTTP.post(`/category`, {
-            name: this.newCategory,
-            photo: imageRespond.data.url
+            name: this.newCategory
           });
           this.categories.push(category.data.category);
           this.isAddingCategory = false;
@@ -220,15 +200,10 @@ export default {
           console.log(e.message);
           console.log(e.response.data.message);
         }
-      } else {
-        console.log('Nie dodałeś zdj');
-      }
-
     }
   },
   async beforeCreate() {
     const category = await HTTP.get(`/category`);
-    // console.log(category.data.data.categories);
     this.categories = category.data.data.categories;
     this.editableArticle = this.$route.params;
     this.post.title = this.editableArticle.title;
@@ -239,9 +214,6 @@ export default {
     this.post.distance = this.editableArticle.distance;
     this.post.map = this.editableArticle.map;
     this.editorData = this.editableArticle.content;
-
-    console.log(this.post.tripDate)
-    
   }
 }
 
