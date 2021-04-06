@@ -62,6 +62,7 @@
       ></card>
     </div>
 
+    <button @click="paginateBefore" :disabled="!canPaginateBack">Załaduj mniej xD</button>
     <button @click="paginateNext" :disabled="!canPaginate">Załaduj więcej xD</button>
   </div>
 </template>
@@ -94,7 +95,8 @@ export default {
     ...mapGetters({
       articles: "articles/getPosts",
       categories: "categories/getCategories",
-      canPaginate: "articles/canPaginate"
+      canPaginate: "articles/canPaginate",
+      canPaginateBack: "articles/canPaginateBack"
     })
   },
   methods: {
@@ -111,6 +113,17 @@ export default {
       this.$store.dispatch('articles/getArticles', {
         change: true,
         paginate: true,
+        add: 8,
+        country: this.country,
+        mountains: this.mountains,
+        distance: this.distance
+      });
+    },
+    paginateBefore() {
+      this.$store.dispatch('articles/getArticles', {
+        change: true,
+        paginate: true,
+        add: -8,
         country: this.country,
         mountains: this.mountains,
         distance: this.distance

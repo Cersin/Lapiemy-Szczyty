@@ -7,5 +7,8 @@ export default {
     },
     canPaginate(state) {
         return state.canPaginate
+    },
+    canPaginateBack(state) {
+        return state.canPaginateBack
     }
 }
