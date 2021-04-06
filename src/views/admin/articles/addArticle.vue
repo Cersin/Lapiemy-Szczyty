@@ -12,6 +12,11 @@
       </div>
 
       <div class="input">
+        <label for="country">Kraj</label>
+        <input id="country" v-model="post.country" type="text" required>
+      </div>
+
+      <div class="input">
         <label for="category">Kategoria</label>
         <select v-model="post.category" id="category" name="category">
           <option v-for="(category, i) in categories" v-bind:key="i" :value="category.name">{{ category.name }}</option>
@@ -92,6 +97,7 @@ export default {
         tripDate: null, // required
         duration: null, // no required
         distance: null, // no required
+        country: null, // required
         map: null // no required
       },
       editor: Editor,
@@ -207,6 +213,7 @@ export default {
     this.categories = category.data.data.categories;
     this.editableArticle = this.$route.params;
     this.post.title = this.editableArticle.title;
+    this.post.country = this.editableArticle.country;
     this.post.description = this.editableArticle.description;
     this.post.category = this.editableArticle.category;
     this.post.tripDate = this.editableArticle.tripDate;

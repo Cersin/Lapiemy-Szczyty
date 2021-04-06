@@ -2,9 +2,6 @@ export default {
     setPosts(state, payload) {
         state.articles = payload.articles;
     },
-    setPostsPaginate(state, payload) {
-        state.articles = payload.articles;
-    },
     setArticle(state, payload) {
         state.articlesCategory = payload.articles
     },
@@ -13,7 +10,6 @@ export default {
     },
     paginate(state, payload) {
         state.skip = payload.skip;
-        state.limit = payload.limit;
     },
     canPaginate(state, payload) {
         state.canPaginate = payload.canPaginate
