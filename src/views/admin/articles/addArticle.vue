@@ -219,6 +219,7 @@ export default {
                 tripDate: this.post.tripDate,
                 map: this.post.map
             });
+            this.$router.push({path:'/'});
       }else if(this.editableArticle.mainPhoto !== this.mainPhoto){
         let formData = new FormData();
         formData.append('upload', this.mainPhoto);
@@ -240,6 +241,7 @@ export default {
                 tripDate: this.post.tripDate,
                 map: this.post.map
             });
+            this.$router.push({path:'/'});
           } catch (e) {
             console.log(e.message);
             console.log(e.response.data.message);
