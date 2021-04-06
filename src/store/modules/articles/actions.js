@@ -32,10 +32,9 @@ export default {
         if (context.state.url === urlNew) {
             // sprawdza czy chcemy paginować
             if (payload.paginate) {
-                console.log("Paginate kurwa");
                 await context.commit('paginate', {
-                    skip: context.state.skip + 8,
-                    limit: context.state.limit + 8
+                    skip: context.state.skip + payload.add,
+                    limit: context.state.limit + payload.add
                 });
                 const urlPaginate = `articles?skip=${context.state.skip}&limit=${context.state.limit}
                 ${payload.country}
@@ -43,7 +42,11 @@ export default {
                 ${payload.distance}`;
                 const posts = await HTTP
                     .get(urlPaginate);
-                if (posts.data.results < 8) {
+                if (posts.data.results >= 8) {
+                    context.commit('canPaginate', {
+                        canPaginate: true
+                    });
+                } else {
                     context.commit('canPaginate', {
                         canPaginate: false
                     });
@@ -51,11 +54,19 @@ export default {
                 await context.commit('setPostsPaginate', {
                     articles: posts.data.data.articles
                 });
+                if (context.state.skip > 0) {
+                    context.commit('canPaginateBack', {
+                        canPaginateBack: true
+                    });
+                } else {
+                    context.commit('canPaginateBack', {
+                        canPaginateBack: false
+                    });
+                }
                 context.commit('setUrl', {
                     url: urlPaginate
                 });
             }
-            console.log('jest taki kurwa');
         } else {
             await context.commit('paginate', {
                 skip: 0,
@@ -73,6 +84,19 @@ export default {
             if (posts.data.results >= 8) {
                 context.commit('canPaginate', {
                     canPaginate: true
+                });
+            } else {
+                context.commit('canPaginate', {
+                    canPaginate: false
+                });
+            }
+            if (context.state.skip > 0) {
+                context.commit('canPaginateBack', {
+                    canPaginateBack: true
+                });
+            } else {
+                context.commit('canPaginateBack', {
+                    canPaginateBack: false
                 });
             }
             await context.commit('setPosts', {

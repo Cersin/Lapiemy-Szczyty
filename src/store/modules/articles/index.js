@@ -11,7 +11,8 @@ export default {
             url: null,
             skip: 0,
             limit: 8,
-            canPaginate: false
+            canPaginate: false,
+            canPaginateBack: false
         }
     },
     mutations: mutations,

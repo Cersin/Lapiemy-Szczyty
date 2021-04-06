@@ -17,5 +17,8 @@ export default {
     },
     canPaginate(state, payload) {
         state.canPaginate = payload.canPaginate
+    },
+    canPaginateBack(state, payload) {
+        state.canPaginateBack = payload.canPaginateBack
     }
 }
