@@ -24,39 +24,60 @@ export default {
         if (context.state.articles && !payload.change) {
             return;
         }
-        if (!payload.change) {
-            const urlNew = `articles?skip=${payload.skip}&limit=${payload.limit}`;
-            const posts = await HTTP
-                .get(urlNew);
-            await context.commit('setPosts', {
-                articles: posts.data.data.articles
-            });
-
-        } else {
-            const urlNew = `articles?skip=${payload.skip}&limit=${payload.limit}
+        let urlNew = `articles?skip=${context.state.skip}&limit=${context.state.limit}
                 ${payload.country}
                 ${payload.mountains}
                 ${payload.distance}`;
-            // sprawdza czy url nie jest takie samo jak wczesniej
-            if (context.state.url === urlNew) {
-                return;
-            } else {
+        // sprawdza czy url nie jest takie samo jak wczesniej
+        if (context.state.url === urlNew) {
+            // sprawdza czy chcemy paginować
+            if (payload.paginate) {
+                console.log("Paginate kurwa");
+                await context.commit('paginate', {
+                    skip: context.state.skip + 8,
+                    limit: context.state.limit + 8
+                });
+                const urlPaginate = `articles?skip=${context.state.skip}&limit=${context.state.limit}
+                ${payload.country}
+                ${payload.mountains}
+                ${payload.distance}`;
+                const posts = await HTTP
+                    .get(urlPaginate);
+                if (posts.data.results < 8) {
+                    context.commit('canPaginate', {
+                        canPaginate: false
+                    });
+                }
+                await context.commit('setPostsPaginate', {
+                    articles: posts.data.data.articles
+                });
                 context.commit('setUrl', {
-                    url: urlNew
+                    url: urlPaginate
                 });
             }
+            console.log('jest taki kurwa');
+        } else {
+            await context.commit('paginate', {
+                skip: 0,
+                limit: 8
+            });
+            urlNew = `articles?skip=${context.state.skip}&limit=${context.state.limit}
+                ${payload.country}
+                ${payload.mountains}
+                ${payload.distance}`;
+            await context.commit('setUrl', {
+                url: urlNew
+            });
             const posts = await HTTP
                 .get(urlNew);
+            if (posts.data.results >= 8) {
+                context.commit('canPaginate', {
+                    canPaginate: true
+                });
+            }
             await context.commit('setPosts', {
                 articles: posts.data.data.articles
             });
         }
-    },
-
-    async getArticlesByCategory(context, payload) {
-        const articles = await HTTP.get(`articles?category=${payload.category}`);
-        await context.commit('setArticle', {
-            articles: articles.data.data.articles
-        });
     }
 }

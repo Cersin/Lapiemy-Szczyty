@@ -61,6 +61,8 @@
             :mainPhoto="article.mainPhoto"
       ></card>
     </div>
+
+    <button @click="paginateNext" :disabled="!canPaginate">Załaduj więcej xD</button>
   </div>
 </template>
 
@@ -78,26 +80,37 @@ export default {
       distance: ''
     }
   },
-  async beforeCreate() {
+  async created() {
     this.$store.dispatch('articles/getArticles', {
       change: false,
-      skip: 0,
-      limit: 6
+      paginate: false,
+      country: this.country,
+      mountains: this.mountains,
+      distance: this.distance
     });
     this.$store.dispatch('categories/getCategories');
   },
   computed: {
     ...mapGetters({
       articles: "articles/getPosts",
-      categories: "categories/getCategories"
+      categories: "categories/getCategories",
+      canPaginate: "articles/canPaginate"
     })
   },
   methods: {
     search() {
       this.$store.dispatch('articles/getArticles', {
         change: true,
-        skip: 0,
-        limit: 6,
+        paginate: false,
+        country: this.country,
+        mountains: this.mountains,
+        distance: this.distance
+      });
+    },
+    paginateNext() {
+      this.$store.dispatch('articles/getArticles', {
+        change: true,
+        paginate: true,
         country: this.country,
         mountains: this.mountains,
         distance: this.distance
