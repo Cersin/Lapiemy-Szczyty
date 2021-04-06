@@ -10,7 +10,6 @@ export default {
             articlesCategory: null,
             url: null,
             skip: 0,
-            limit: 8,
             canPaginate: false,
             canPaginateBack: false
         }

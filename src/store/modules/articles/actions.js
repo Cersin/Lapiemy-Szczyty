@@ -9,6 +9,7 @@ export default {
             description: payload.post.description,
             category: payload.post.category,
             distance: payload.post.distance,
+            country: payload.post.country,
             mainPhoto: payload.mainPhoto,
             content: payload.content,
             duration: payload.post.duration,
@@ -24,7 +25,7 @@ export default {
         if (context.state.articles && !payload.change) {
             return;
         }
-        let urlNew = `articles?skip=${context.state.skip}&limit=${context.state.limit}
+        let urlNew = `articles?skip=${context.state.skip}&limit=8
                 ${payload.country}
                 ${payload.mountains}
                 ${payload.distance}`;
@@ -33,25 +34,29 @@ export default {
             // sprawdza czy chcemy paginować
             if (payload.paginate) {
                 await context.commit('paginate', {
-                    skip: context.state.skip + payload.add,
-                    limit: context.state.limit + payload.add
+                    skip: context.state.skip + payload.add
                 });
-                const urlPaginate = `articles?skip=${context.state.skip}&limit=${context.state.limit}
+                const urlPaginate = `articles?skip=${context.state.skip}&limit=8
                 ${payload.country}
                 ${payload.mountains}
                 ${payload.distance}`;
                 const posts = await HTTP
                     .get(urlPaginate);
-                if (posts.data.results >= 8) {
-                    context.commit('canPaginate', {
-                        canPaginate: true
-                    });
-                } else {
+                if (posts.data.results === 0) {
                     context.commit('canPaginate', {
                         canPaginate: false
                     });
+                    return;
+                } else if (posts.data.results < 8) {
+                    context.commit('canPaginate', {
+                        canPaginate: false
+                    });
+                } else {
+                    context.commit('canPaginate', {
+                        canPaginate: true
+                    });
                 }
-                await context.commit('setPostsPaginate', {
+                await context.commit('setPosts', {
                     articles: posts.data.data.articles
                 });
                 if (context.state.skip > 0) {
@@ -69,10 +74,9 @@ export default {
             }
         } else {
             await context.commit('paginate', {
-                skip: 0,
-                limit: 8
+                skip: 0
             });
-            urlNew = `articles?skip=${context.state.skip}&limit=${context.state.limit}
+            urlNew = `articles?skip=${context.state.skip}&limit=8
                 ${payload.country}
                 ${payload.mountains}
                 ${payload.distance}`;
@@ -81,13 +85,18 @@ export default {
             });
             const posts = await HTTP
                 .get(urlNew);
-            if (posts.data.results >= 8) {
+            if (posts.data.results === 0) {
                 context.commit('canPaginate', {
-                    canPaginate: true
+                    canPaginate: false
+                });
+                return;
+            } else if (posts.data.results < 8) {
+                context.commit('canPaginate', {
+                    canPaginate: false
                 });
             } else {
                 context.commit('canPaginate', {
-                    canPaginate: false
+                    canPaginate: true
                 });
             }
             if (context.state.skip > 0) {
