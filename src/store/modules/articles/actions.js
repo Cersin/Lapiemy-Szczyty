@@ -21,10 +21,16 @@ export default {
     },
 
     async getStats(context) {
-      const stats = await HTTP.get('articles/stats');
-      context.commit('setStats', {
-          stats: stats.data.data.stats
-      });
+        if (!context.state.statistic) {
+            const stats = await HTTP.get('articles/stats');
+            const hoursConvert = stats.data.data.stats[0].duration / 60;
+            stats.data.data.stats[0].hours = Math.floor(hoursConvert);
+            const minutesConvert = (hoursConvert - stats.data.data.stats[0].hours) * 60;
+            stats.data.data.stats[0].minutes = Math.round(minutesConvert);
+            context.commit('setStats', {
+                stats: stats.data.data.stats
+            });
+        }
     },
 
     async getArticles(context, payload) {
