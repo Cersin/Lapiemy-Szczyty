@@ -27,11 +27,16 @@
         </div>
       </div>
 
-      <div class="input">
+      <div class="input" v-if="!mainPhoto">
         <label for="mainPhoto">Główne zdjęcie</label>
         <input type="file" ref="mainPhoto"
                id="mainPhoto" name="mainPhoto"
                accept="image/png, image/jpeg, image/jpg" @change="onFileUpload($event)">
+      </div>
+
+      <div class="mainPhoto" v-else>
+        <img :src="mainPhoto" alt="Main Photo">
+        <button @click.prevent="mainPhoto = null">Zmień zdjęcie główne</button>
       </div>
 
       <div class="input">
@@ -58,9 +63,13 @@
 
       <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
       <!-- <button @click.prevent="addPost()">Dodaj artykuł</button> -->
-      <button class="article__button" @click.prevent="addPost()">
+      <button class="article__button" @click.prevent="addPost()" v-if="!editableArticle" >
             <span class="article__button-polygon"></span>
             <span class="article__button-text">Dodaj artykuł</span>
+      </button>
+      <button class="article__button" @click.prevent="editPost()" v-else >
+            <span class="article__button-polygon"></span>
+            <span class="article__button-text">Edytuj artykuł</span>
       </button>
     </form>
   </div>
@@ -188,6 +197,53 @@ export default {
       }
 
     },
+    async editPost(){
+      console.log("No i tutaj jesteśmy w edycji");
+      console.log(this.post);
+      if(this.editableArticle.mainPhoto === this.mainPhoto){
+        console.log("Takie samo zdjęcie główne")
+        await HTTP.patch(`articles/${this.post._id}`,{
+                title: this.post.title,
+                description: this.post.description,
+                category: this.post.category,
+                distance: this.post.distance,
+                mainPhoto: this.mainPhoto,
+                content: this.editorData,
+                duration: this.post.duration,
+                tripDate: this.post.tripDate,
+                map: this.post.map
+            });
+      }else if(this.editableArticle.mainPhoto !== this.mainPhoto){
+        let formData = new FormData();
+        formData.append('upload', this.mainPhoto);
+        if (this.mainPhoto) {
+          try {
+            const imageRespond = await HTTP.post('image/send', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            });
+            await HTTP.patch(`articles/${this.post._id}`,{
+                title: this.post.title,
+                description: this.post.description,
+                category: this.post.category,
+                distance: this.post.distance,
+                mainPhoto: imageRespond.data.url,
+                content: this.editorData,
+                duration: this.post.duration,
+                tripDate: this.post.tripDate,
+                map: this.post.map
+            });
+          } catch (e) {
+            console.log(e.message);
+            console.log(e.response.data.message);
+          }
+        } else {
+          console.log('Nie dodałeś zdj');
+        }
+      }
+      
+    },
     onFileUpload($event) {
       this.mainPhoto = $event.target.files[0];
     },
@@ -202,7 +258,7 @@ export default {
           console.log(e.message);
           console.log(e.response.data.message);
         }
-    }
+    },
   },
   async beforeCreate() {
     const category = await HTTP.get(`/category`);
@@ -210,15 +266,10 @@ export default {
     
     if(this.$route.params.title){
       this.editableArticle = this.$route.params;
-      this.post.title = this.editableArticle.title;
-      this.post.description = this.editableArticle.description;
-      this.post.category = this.editableArticle.category;
-      this.post.tripDate = this.editableArticle.tripDate;
-      this.post.duration = this.editableArticle.duration;
-      this.post.distance = this.editableArticle.distance;
-      this.post.map = this.editableArticle.map;
+      this.post = this.editableArticle;
+      this.post.tripDate = this.$filters.moment(this.editableArticle.tripDate, "YYYY-MM-DD");
+      this.mainPhoto = this.editableArticle.mainPhoto;
       this.editorData = this.editableArticle.content;
-      console.log(this.post)
     }
   }
 }
@@ -268,6 +319,21 @@ form {
     }
   }
   
+}
+.mainPhoto {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+
+  img {
+    max-width: 30vw;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  button{
+    width: 10vw;
+  }
 }
 .input:not(:last-child) {
   margin-bottom: 1rem;

@@ -1,15 +1,13 @@
 <template>
   <section class="desktop">
-    <transition name="container__transition">
-      <div class="container" v-if="!open">
+    
+      <div class="container">
         <button style="margin-right: 1rem" @click="addArticle">Dodaj post</button>
         <button @click="open =!open && loadArticle()">Edytuj post</button>
       </div>
-    </transition>
-    
     
     <transition name="popup__transition">
-      <div class="popup" id="popup" v-if="open && articles">
+      <div class="popup" id="popup" v-if="open && posts">
         <div class="popup__content">
           <table>
             <tr>
@@ -17,13 +15,14 @@
               <th>Tytuł</th>
               <th>Akcja</th>  
             </tr>
-            <tr v-for="(article, i) in articles" v-bind:key="i">
+            <tr v-for="(article, i) in posts" v-bind:key="i">
               <td>{{i+1}}</td>
               <td>{{article.title}}</td>
               <td><button @click="editArticle(article)">Edytuj</button></td>
             </tr>
           </table>
-          Jakiś contencik
+          <button @click="paginateBefore" :disabled="!canPaginateBack">Załaduj mniej xD</button>
+          <button @click="paginateNext" :disabled="!canPaginate">Załaduj więcej xD</button>
         </div>
         <a href="#" @click="open = !open" class="popup__close">&times;</a>
       </div>
@@ -32,13 +31,17 @@
 </template>
 
 <script>
-import {HTTP} from '@/http-common';
+// import {HTTP} from '@/http-common';
+import {mapGetters} from "vuex";
+
 export default {
   name: "desktop",
   data(){
     return{
       open:false,
-      articles:null,
+      country: '',
+      mountains: '',
+      distance: ''
     }
   },
   methods: {
@@ -50,18 +53,49 @@ export default {
       this.$router.push({ name: 'editArticle', params:editableArticle });
     },
     async loadArticle(){
-      const response = await HTTP.get(`/articles`);
-      this.articles = response.data.data.articles;
+      // const response = await HTTP.get(`/articles`);
+      this.$store.dispatch('articles/getArticles', {
+      change: false,
+      paginate: false,
+      country: this.country,
+      mountains: this.mountains,
+      distance: this.distance
+      });
+      console.log(this.posts)
+    },
+    paginateNext() {
+      this.$store.dispatch('articles/getArticles', {
+        change: true,
+        paginate: true,
+        add: 8,
+        country: this.country,
+        mountains: this.mountains,
+        distance: this.distance
+      });
+    },
+    paginateBefore() {
+      this.$store.dispatch('articles/getArticles', {
+        change: true,
+        paginate: true,
+        add: -8,
+        country: this.country,
+        mountains: this.mountains,
+        distance: this.distance
+      });
     }
+  },
+  computed: {
+    ...mapGetters({
+      posts: "articles/getPosts",
+      canPaginate: "articles/canPaginate",
+      canPaginateBack: "articles/canPaginateBack"
+    })
   },
 }
 </script>
 
 <style lang="scss" scoped>
 @import "./src/styles/base/utilities";
-  .container__transition-enter-active, .container__transition-leave-active{
-    transition: all .5s;
-  }
 
   .popup__transition-enter-active, .popup__transition-leave-active{
     transition: all .5s;
@@ -72,9 +106,10 @@ export default {
     transform: scale(0);
   }
   .popup{
-    position: relative;
+    position: absolute;
     background-color: white;
     width: 60vw;
+    height: 80vh;
     z-index: 999;
     border-radius: 50px;
     padding: 3rem;
