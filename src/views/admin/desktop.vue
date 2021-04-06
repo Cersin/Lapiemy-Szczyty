@@ -1,9 +1,12 @@
 <template>
   <section class="desktop">
-    <div class="container">
-      <button style="margin-right: 1rem" @click="addArticle">Dodaj post</button>
-      <button @click="open =!open">Edytuj post</button>
-    </div>
+    <transition name="container__transition">
+      <div class="container" v-if="!open">
+        <button style="margin-right: 1rem" @click="addArticle">Dodaj post</button>
+        <button @click="open =!open && loadArticle()">Edytuj post</button>
+      </div>
+    </transition>
+    
     
     <transition name="popup__transition">
       <div class="popup" id="popup" v-if="open && articles">
@@ -46,16 +49,19 @@ export default {
       console.log(editableArticle)
       this.$router.push({ name: 'editArticle', params:editableArticle });
     },
+    async loadArticle(){
+      const response = await HTTP.get(`/articles`);
+      this.articles = response.data.data.articles;
+    }
   },
-  async beforeCreate() {
-    const response = await HTTP.get(`/articles`);
-    this.articles = response.data.data.articles;
-  }
 }
 </script>
 
 <style lang="scss" scoped>
 @import "./src/styles/base/utilities";
+  .container__transition-enter-active, .container__transition-leave-active{
+    transition: all .5s;
+  }
 
   .popup__transition-enter-active, .popup__transition-leave-active{
     transition: all .5s;
@@ -66,10 +72,9 @@ export default {
     transform: scale(0);
   }
   .popup{
-    position: absolute;
+    position: relative;
     background-color: white;
     width: 60vw;
-    
     z-index: 999;
     border-radius: 50px;
     padding: 3rem;

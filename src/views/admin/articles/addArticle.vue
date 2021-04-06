@@ -54,6 +54,8 @@
         <input id="map" v-model="post.map" type="text">
       </div>
 
+      <div v-if="post.map" v-html="post.map"></div>
+
       <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
       <!-- <button @click.prevent="addPost()">Dodaj artykuł</button> -->
       <button class="article__button" @click.prevent="addPost()">
@@ -205,15 +207,19 @@ export default {
   async beforeCreate() {
     const category = await HTTP.get(`/category`);
     this.categories = category.data.data.categories;
-    this.editableArticle = this.$route.params;
-    this.post.title = this.editableArticle.title;
-    this.post.description = this.editableArticle.description;
-    this.post.category = this.editableArticle.category;
-    this.post.tripDate = this.editableArticle.tripDate;
-    this.post.duration = this.editableArticle.duration;
-    this.post.distance = this.editableArticle.distance;
-    this.post.map = this.editableArticle.map;
-    this.editorData = this.editableArticle.content;
+    
+    if(this.$route.params.title){
+      this.editableArticle = this.$route.params;
+      this.post.title = this.editableArticle.title;
+      this.post.description = this.editableArticle.description;
+      this.post.category = this.editableArticle.category;
+      this.post.tripDate = this.editableArticle.tripDate;
+      this.post.duration = this.editableArticle.duration;
+      this.post.distance = this.editableArticle.distance;
+      this.post.map = this.editableArticle.map;
+      this.editorData = this.editableArticle.content;
+      console.log(this.post)
+    }
   }
 }
 
@@ -261,8 +267,8 @@ form {
       border-bottom: 3px solid red;
     }
   }
+  
 }
-
 .input:not(:last-child) {
   margin-bottom: 1rem;
 }
