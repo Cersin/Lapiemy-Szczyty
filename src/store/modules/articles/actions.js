@@ -20,6 +20,13 @@ export default {
         await router.push({path: '/admin'});
     },
 
+    async getStats(context) {
+      const stats = await HTTP.get('articles/stats');
+      context.commit('setStats', {
+          stats: stats.data.data.stats
+      });
+    },
+
     async getArticles(context, payload) {
         // sprawdza czy artykuly są wczytywane pierwszy raz albo czy są filtrowane
         if (context.state.articles && !payload.change) {

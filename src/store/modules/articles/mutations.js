@@ -16,5 +16,8 @@ export default {
     },
     canPaginateBack(state, payload) {
         state.canPaginateBack = payload.canPaginateBack
+    },
+    setStats(state, payload) {
+        state.statistic = payload.stats[0]
     }
 }

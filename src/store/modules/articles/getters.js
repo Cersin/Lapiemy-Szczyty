@@ -10,5 +10,8 @@ export default {
     },
     canPaginateBack(state) {
         return state.canPaginateBack
+    },
+    statistic(state) {
+        return state.statistic
     }
 }
