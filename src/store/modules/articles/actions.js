@@ -56,29 +56,28 @@ export default {
                 });
             }
             console.log('jest taki kurwa');
-            return;
         } else {
             await context.commit('paginate', {
                 skip: 0,
                 limit: 8
             });
-            await context.commit('setUrl', {
-                url: urlNew
-            });
-        }
-        urlNew = `articles?skip=${context.state.skip}&limit=${context.state.limit}
+            urlNew = `articles?skip=${context.state.skip}&limit=${context.state.limit}
                 ${payload.country}
                 ${payload.mountains}
                 ${payload.distance}`;
-        const posts = await HTTP
-            .get(urlNew);
-        if (posts.data.results >= 8) {
-            context.commit('canPaginate', {
-                canPaginate: true
+            await context.commit('setUrl', {
+                url: urlNew
+            });
+            const posts = await HTTP
+                .get(urlNew);
+            if (posts.data.results >= 8) {
+                context.commit('canPaginate', {
+                    canPaginate: true
+                });
+            }
+            await context.commit('setPosts', {
+                articles: posts.data.data.articles
             });
         }
-        await context.commit('setPosts', {
-            articles: posts.data.data.articles
-        });
     }
 }
