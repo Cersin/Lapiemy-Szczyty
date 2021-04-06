@@ -8,7 +8,10 @@ export default {
         return {
             articles: null,
             articlesCategory: null,
-            url: null
+            url: null,
+            skip: 0,
+            limit: 8,
+            canPaginate: false
         }
     },
     mutations: mutations,

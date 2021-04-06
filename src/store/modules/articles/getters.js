@@ -4,5 +4,8 @@ export default {
     },
     getCategoryPosts(state) {
         return state.articlesCategory;
+    },
+    canPaginate(state) {
+        return state.canPaginate
     }
 }
