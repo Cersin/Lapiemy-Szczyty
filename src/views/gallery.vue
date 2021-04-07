@@ -12,7 +12,10 @@
         :imgs="imgs"
         :index="index"
         @hide="handleHide"
-    ></vue-easy-lightbox>
+        @on-prev-click="previous"
+        @on-next-click="next"
+    >
+    </vue-easy-lightbox>
   </div>
 </template>
 
@@ -56,6 +59,17 @@ export default {
     },
     handleHide() {
       this.visible = false
+    },
+    next(){
+      this.index += 1;
+    },
+    previous(){
+      this.index -= 1;
+    }
+  },
+  watch:{
+    index(){
+      console.log(this.index);
     }
   }
 }
