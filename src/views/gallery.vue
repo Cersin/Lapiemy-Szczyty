@@ -1,9 +1,11 @@
 <template>
   <div>
-    <div v-for="(image, index) in images" :key="index">
-      <img @click="showSingle(image, index)" height="300" :src="image">
+    <div class="container">
+      <button class="button-green" @click="showSingle(image)">Pokaż wszystkie</button>
+      <div class="images">
+        <img v-for="(image, index) in images" :key="index" @click="showSingle(image, index)" height="300" :src="image">
+      </div>
     </div>
-    <button @click="showSingle(image)">Show all.</button>
 
     <vue-easy-lightbox
         escDisabled
@@ -62,5 +64,48 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container {
+  display: flex;
+  width: 70%;
+  flex-direction: column;
+  margin: 0 auto;
+
+  @media only screen and (max-width: 800px) {
+    width: 90%;
+  }
+}
+
+button {
+  margin: 2rem 0;
+}
+
+.images {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-gap: 2rem;
+  grid-template-columns: repeat(auto-fill, 300px);
+
+  @media only screen and (max-width: 1500px) {
+    grid-template-columns: repeat(auto-fill, 200px);
+  }
+
+  @media only screen and (max-width: 1000px) {
+    grid-template-columns: repeat(auto-fill, 125px);
+  }
+
+  img {
+    width: 300px;
+    height: auto;
+
+    @media only screen and (max-width: 1500px) {
+      width: 200px;
+    }
+
+    @media only screen and (max-width: 1000px) {
+      width: 125px;
+    }
+  }
+}
 
 </style>
