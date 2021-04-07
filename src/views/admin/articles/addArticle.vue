@@ -218,7 +218,7 @@ export default {
       this.v$.post.$touch();
       this.v$.mainPhoto.$touch();
       this.v$.editorData.$touch();
-      if(this.v$.post.$error && this.v$.mainPhoto.$error && this.v$.editorData.$error ) return alert('Proszę poprawić błędy w formularzu :)');
+      if(this.v$.post.$error || this.v$.mainPhoto.$error || this.v$.editorData.$error ) return alert('Proszę poprawić błędy w formularzu :)');
       
       let formData = new FormData();
       formData.append('upload', this.mainPhoto);
@@ -246,7 +246,7 @@ export default {
       this.v$.post.$touch();
       this.v$.mainPhoto.$touch();
       this.v$.editorData.$touch();
-      if(this.v$.post.$error && this.v$.mainPhoto.$error && this.v$.editorData.$error ) return alert('Proszę poprawić błędy w formularzu :)');
+      if(this.v$.post.$error || this.v$.mainPhoto.$error || this.v$.editorData.$error ) return alert('Proszę poprawić błędy w formularzu :)');
       if (this.editableArticle.mainPhoto === this.mainPhoto) {
         console.log("Takie samo zdjęcie główne")
         await HTTP.patch(`articles/${this.post._id}`,{
@@ -324,7 +324,10 @@ export default {
       this.mainPhoto = this.editableArticle.mainPhoto;
       this.editorData = this.editableArticle.content;
     }
-  }
+  },
+  // created() {
+  //   this.v$.reset();
+  // },
 }
 
 
