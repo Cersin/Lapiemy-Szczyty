@@ -39,7 +39,8 @@ export default {
   },
   beforeCreate() {
     this.$store.dispatch('gallery/getPhotos', {
-      skip: 0
+      skip: 0,
+      paginate: false
     });
   },
   computed: {
