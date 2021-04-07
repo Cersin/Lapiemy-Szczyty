@@ -74,7 +74,14 @@ export default {
   },
   watch:{
     index(){
-      console.log(this.index);
+      if (this.index === this.images.length -1) {
+        console.log('to ostatni');
+        this.$store.dispatch('gallery/getPhotos', {
+          skip: this.images.length,
+          paginate: true
+        });
+        this.imgs = this.images;
+      }
     }
   }
 }
