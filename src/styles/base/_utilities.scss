@@ -38,6 +38,12 @@
   transition: all 1s;
   cursor: pointer;
 
+  &:disabled {
+    opacity: .5;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
   &:hover {
     background-color: darken($color-secondary, 5);
     border-radius: 22px 0;

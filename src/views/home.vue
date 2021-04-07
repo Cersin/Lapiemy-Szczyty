@@ -63,8 +63,11 @@
       ></card>
     </div>
 
-    <button @click="paginateBefore" :disabled="!canPaginateBack">Załaduj mniej xD</button>
-    <button @click="paginateNext" :disabled="!canPaginate">Załaduj więcej xD</button>
+    <div class="paginate">
+      <button class="button-green back" @click="paginateBefore" :disabled="!canPaginateBack">Wstecz</button>
+      <button class="button-green more" @click="paginateNext" :disabled="!canPaginate">Pokaż więcej</button>
+    </div>
+
   </div>
 </template>
 
@@ -136,7 +139,12 @@ export default {
 
 <style lang="scss" scoped>
 @import "src/styles/abstract/variables";
-
+.paginate {
+  margin-bottom: 2rem;
+}
+.back {
+  margin-right: 2rem;
+}
 .home {
   min-height: 100%;
   width: 80%;
