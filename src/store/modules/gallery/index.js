@@ -6,7 +6,8 @@ export default {
     namespaced: true,
     state() {
         return {
-            images: []
+            images: [],
+            canPaginate: false
         }
     },
     mutations: mutations,

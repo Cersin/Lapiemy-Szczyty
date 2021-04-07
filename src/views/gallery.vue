@@ -5,6 +5,7 @@
       <div class="images">
         <img v-for="(image, index) in images" :key="index" @click="showSingle(image, index)" height="300" :src="image">
       </div>
+      <button :disabled="!canPaginate" class="button-green more" @click="loadMore()">Załaduj więcej</button>
     </div>
 
     <vue-easy-lightbox
@@ -45,12 +46,12 @@ export default {
   },
   computed: {
     ...mapGetters({
-      images: "gallery/images"
+      images: "gallery/images",
+      canPaginate: "gallery/canPaginate"
     })
   },
   methods: {
     showSingle(image, index) {
-      console.log(index);
       this.imgs = this.images; // all images
       if (index) {
         this.index = index // index of imgList
@@ -70,12 +71,17 @@ export default {
     },
     previous(){
       this.index -= 1;
+    },
+    loadMore() {
+      this.$store.dispatch('gallery/getPhotos', {
+        skip: this.images.length,
+        paginate: true
+      });
     }
   },
   watch:{
     index(){
-      if (this.index === this.images.length -1) {
-        console.log('to ostatni');
+      if (this.index === this.images.length -1 && this.canPaginate) {
         this.$store.dispatch('gallery/getPhotos', {
           skip: this.images.length,
           paginate: true
@@ -93,6 +99,7 @@ export default {
   width: 70%;
   flex-direction: column;
   margin: 0 auto;
+  margin-bottom: 5rem;
 
   @media only screen and (max-width: 800px) {
     width: 90%;
@@ -101,6 +108,10 @@ export default {
 
 button {
   margin: 2rem 0;
+}
+.more {
+  width: 50%;
+  align-self: center;
 }
 
 .images {
