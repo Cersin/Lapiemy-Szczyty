@@ -38,7 +38,9 @@ export default {
     }
   },
   beforeCreate() {
-    this.$store.dispatch('gallery/getPhotos');
+    this.$store.dispatch('gallery/getPhotos', {
+      skip: 0
+    });
   },
   computed: {
     ...mapGetters({

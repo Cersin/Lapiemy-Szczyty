@@ -1,11 +1,11 @@
 import {HTTP} from '@/http-common';
 
 export default {
-    async getPhotos(context) {
+    async getPhotos(context, payload) {
         if (context.state.images.length !== 0) {
             return;
         }
-        const images = await HTTP.get('image');
+        const images = await HTTP.get(`image?skip=${payload.skip}&limit=12`);
         context.commit('setImages', {
             images: images.data.data.images
         })
