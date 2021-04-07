@@ -3,17 +3,21 @@
     <form action="addPost()">
       <div class="input">
         <label for="title">Tytuł</label>
-        <input id="title" v-model="post.title" type="text" required minlength="3">
+        <input id="title" v-model="post.title" type="text"  >
+        <div style="color:red;" v-if="v$.post.title.$error">{{v$.post.title.$errors[0].$message}}</div>
+        <!-- required minlength="3"  @blur="v$.post.title.$touch" -->
       </div>
 
       <div class="input">
         <label for="description">Opis</label>
-        <input id="description" v-model="post.description" type="text" required>
+        <input id="description" v-model="post.description" type="text">
+        <div style="color:red;" v-if="v$.post.description.$error">{{v$.post.description.$errors[0].$message}}</div>
       </div>
 
       <div class="input">
         <label for="country">Kraj</label>
-        <input id="country" v-model="post.country" type="text" required>
+        <input id="country" v-model="post.country" type="text">
+        <div style="color:red;" v-if="v$.post.country.$error">{{v$.post.country.$errors[0].$message}}</div>
       </div>
 
       <div class="input">
@@ -21,14 +25,16 @@
         <select v-model="post.category" id="category" name="category">
           <option v-for="(category, i) in categories" v-bind:key="i" :value="category.name">{{ category.name }}</option>
         </select>
+        <div style="color:red;" v-if="v$.post.category.$error">{{v$.post.category.$errors[0].$message}}</div>
       </div>
 
       <div class="add-category">
         <button @click.prevent="isAddingCategory = !isAddingCategory">Dodaj kategorię</button>
         <div v-if="isAddingCategory" class="add-category-active">
           <label for="newCategory">Kategoria</label>
-          <input id="newCategory" v-model="newCategory" type="text" required>
-          <button class="article__button" @click.prevent="addCategory()">Dodaj</button>
+          <input id="newCategory" v-model="newCategory" type="text">
+          <div style="color:red;" v-if="v$.newCategory.$error">{{v$.newCategory.$errors[0].$message}}</div>
+          <button class="article__button" @click.prevent="addCategory()" :disabled="v$.newCategory.$invalid">Dodaj</button>
         </div>
       </div>
 
@@ -43,10 +49,12 @@
         <img :src="mainPhoto" alt="Main Photo">
         <button @click.prevent="mainPhoto = null">Zmień zdjęcie główne</button>
       </div>
+      <div style="color:red;" v-if="v$.mainPhoto.$error">{{v$.mainPhoto.$errors[0].$message}}</div>
 
       <div class="input">
         <label for="tripDate">Data wycieczki</label>
-        <input id="tripDate" v-model="post.tripDate" placeholder="Data wycieczki" type="date" required>
+        <input id="tripDate" v-model="post.tripDate" placeholder="Data wycieczki" type="date">
+        <div style="color:red;" v-if="v$.post.tripDate.$error">{{v$.post.tripDate.$errors[0].$message}}</div>
       </div>
 
       <div class="input">
@@ -67,6 +75,7 @@
       <div v-if="post.map" v-html="post.map"></div>
 
       <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+      <div style="color:red;" v-if="v$.editorData.$error">{{v$.editorData.$errors[0].$message}}</div>
       <!-- <button @click.prevent="addPost()">Dodaj artykuł</button> -->
       <button class="article__button" @click.prevent="addPost()" v-if="!editableArticle">
         <span class="article__button-polygon"></span>
@@ -88,11 +97,18 @@ import Editor from '@heaglock/custom-classic-ckeditor5';
 
 import '@ckeditor/ckeditor5-build-classic/build/translations/pl';
 
+import useVuelidate from '@vuelidate/core';
+import { helpers, required,minLength, maxLength } from '@vuelidate/validators';
+
 export default {
   name: "addArticle",
   components: {
     ckeditor: CKEditor.component
   },
+  setup () {
+    return { v$: useVuelidate() }
+  },
+  
   data() {
     return {
       editableArticle: null,
@@ -112,7 +128,7 @@ export default {
         map: null // no required
       },
       editor: Editor,
-      editorData: '<p>Content of the editor.</p>',
+      editorData: null,
       editorConfig: {
         // The configuration of the editor.
         toolbar: {
@@ -178,8 +194,32 @@ export default {
       }
     }
   },
+  validations(){
+    return {
+      post:{
+        title:{required: helpers.withMessage( `Tytuł jest wymagany!`, required ) ,
+              minLength: helpers.withMessage( ({$params}) => `Tytuł powinien zawierać conajmniej ${$params.min} znaków!`, minLength(5)), 
+              $autoDirty: true},
+        description:{required: helpers.withMessage( `Opis jest wymagany!`, required ) ,
+                    maxLength:helpers.withMessage( ({$params}) => `Opis powinien zawierać mniej niż ${$params.max} znaków!`, maxLength(100)), 
+                    $autoDirty: true },
+        country:{required: helpers.withMessage( `Kraj jest wymagany!`, required ),
+                $autoDirty: true},
+        category:{required: helpers.withMessage( `Kategoria jest wymagana!`, required ), $autoDirty: true},
+        tripDate:{required: helpers.withMessage( `Data wycieczki jest wymagana!`, required), $autoDirty: true},
+      },
+      mainPhoto:{required:helpers.withMessage( `Zdjęcie główne jest wymagane!`, required ), $autoDirty: true},
+      editorData:{required:helpers.withMessage( `Uzupełnij post!`, required ), $autoDirty: true},
+      newCategory:{required:helpers.withMessage( `Nazwa jest wymagana!`, required )}
+    }
+  },
   methods: {
     async addPost() {
+      this.v$.post.$touch();
+      this.v$.mainPhoto.$touch();
+      this.v$.editorData.$touch();
+      if(this.v$.post.$error && this.v$.mainPhoto.$error && this.v$.editorData.$error ) return alert('Proszę poprawić błędy w formularzu :)');
+      
       let formData = new FormData();
       formData.append('upload', this.mainPhoto);
       if (this.mainPhoto) {
@@ -201,11 +241,12 @@ export default {
       } else {
         console.log('Nie dodałeś zdj');
       }
-
     },
     async editPost() {
-      console.log("No i tutaj jesteśmy w edycji");
-      console.log(this.post);
+      this.v$.post.$touch();
+      this.v$.mainPhoto.$touch();
+      this.v$.editorData.$touch();
+      if(this.v$.post.$error && this.v$.mainPhoto.$error && this.v$.editorData.$error ) return alert('Proszę poprawić błędy w formularzu :)');
       if (this.editableArticle.mainPhoto === this.mainPhoto) {
         console.log("Takie samo zdjęcie główne")
         await HTTP.patch(`articles/${this.post._id}`,{
