@@ -23,7 +23,7 @@ footer {
   background-color: $color-primary;
   padding: 1rem;
   font-size: .8rem;
-  color: darken(white, 15);
+  color: lighten($color-primary, 7);
 
   display:flex;
   justify-content: center;

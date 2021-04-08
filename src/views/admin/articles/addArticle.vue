@@ -181,7 +181,7 @@ export default {
         },
         simpleUpload: {
           // The URL that the images are uploaded to.
-          uploadUrl: '/image/send',
+          uploadUrl: 'http://localhost:3001/image/send',
 
           // Enable the XMLHttpRequest.withCredentials property.
           withCredentials: false,

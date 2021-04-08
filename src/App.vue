@@ -56,6 +56,7 @@ export default {
   components: {TheNavigation, TheFooter},
   beforeCreate() {
     console.log(this.$store.dispatch('autoLogin'));
+
   }
 }
 </script>
