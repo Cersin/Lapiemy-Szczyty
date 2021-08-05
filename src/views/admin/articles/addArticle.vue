@@ -181,7 +181,7 @@ export default {
         },
         simpleUpload: {
           // The URL that the images are uploaded to.
-          uploadUrl: 'http://localhost:3001/image/send',
+          uploadUrl: 'http://lapiemyszczyty.ct8.pl/image/send',
 
           // Enable the XMLHttpRequest.withCredentials property.
           withCredentials: false,
