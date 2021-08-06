@@ -14,7 +14,18 @@
       <router-link class="routing-element" to="/o-nas">O nas</router-link>
       <router-link v-if="isLogged" class="routing-element" to="/admin">Admin</router-link>
     </div>
+
+    <div class="routing_mobile">
+      <font-awesome-icon class="bar" icon="bars"/>
+    </div>
   </nav>
+
+  <div class="menu-mobile">
+    <router-link class="menu-mobile-element" to="/">Wycieczki</router-link>
+    <router-link class="menu-mobile-element" to="/galeria">Galeria</router-link>
+    <router-link class="menu-mobile-element" to="/o-nas">O nas</router-link>
+    <router-link v-if="isLogged" class="menu-mobile-element" to="/admin">Admin</router-link>
+  </div>
 </template>
 
 <script>
@@ -39,11 +50,10 @@ nav {
   padding: 1rem;
 
   grid-row: nav-start / nav-end;
-
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  }
+}
 
 //// Stylizacja logo /////
 .logo {
@@ -56,7 +66,7 @@ nav {
   flex-direction: row;
   align-items: center;
 
-  @media only screen and (max-width: 700px)  {
+  @media only screen and (max-width: 700px) {
     margin-left: 0;
   }
 
@@ -117,7 +127,7 @@ nav {
       content: "";
       background-color: white;
       height: 2px;
-      width: 0%;
+      width: 0;
       display: block;
       position: relative;
       top: .8rem;
@@ -134,10 +144,9 @@ nav {
       top: .8rem;
     }
 
-    @media only screen and (max-width: 700px)  {
-      margin-right: 0;
+    @media only screen and (max-width: 700px) {
+      display: none;
     }
-
   }
 
   .router-link-active:after {
@@ -149,6 +158,38 @@ nav {
     position: relative;
     top: .8rem;
   }
+}
+
+.routing_mobile {
+  display: flex;
+  align-items: center;
+
+  .bar {
+    margin-right: 2rem;
+    font-size: 2rem;
+  }
+}
+
+.menu-mobile {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-primary-lighter;
+
+  &-element {
+    width: 100%;
+    align-self: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: white;
+    text-decoration: none;
+    padding: 1.5rem;
+
+    &:hover {
+      background-color: $color-grey;
+      color: black;
+    }
+  }
+
 }
 
 </style>

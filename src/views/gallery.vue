@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="gallery">
     <div class="container">
       <button class="button-green" @click="showSingle(image)">Pokaż wszystkie</button>
       <div class="images">
@@ -94,12 +94,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.gallery {
+  display: flex;
+  flex: 1;
+}
+
 .container {
   display: flex;
   width: 70%;
   flex-direction: column;
-  margin: 0 auto;
-  margin-bottom: 5rem;
+  margin: 0 auto 5rem;
 
   @media only screen and (max-width: 800px) {
     width: 90%;

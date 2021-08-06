@@ -13,7 +13,6 @@ html {
 
 .full-page {
   min-height: 100vh;
-
-  display: grid;
-  grid-template-rows: [nav-start] min-content [nav-end start-content] 1fr [end-content start-footer] min-content [end-footer];
+  display: flex;
+  flex-direction: column;
 }

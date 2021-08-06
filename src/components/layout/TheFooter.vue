@@ -18,7 +18,6 @@ export default {
 <style lang="scss" scoped>
 @import "src/styles/abstract/variables";
 footer {
-  grid-row: start-footer / end-footer;
 
   background-color: $color-primary;
   padding: 1rem;
@@ -27,6 +26,8 @@ footer {
 
   display:flex;
   justify-content: center;
+  align-self: flex-end;
+  width: 100%;
 }
 
 </style>
