@@ -144,6 +144,7 @@ export default {
 }
 .back {
   margin-right: 2rem;
+  margin-bottom: 1rem;
 }
 .home {
   flex: 1;
@@ -192,6 +193,7 @@ export default {
 
     @media only screen and (max-width: 850px) {
       margin-bottom: .5rem;
+      font-size: 1.3rem;
     }
   }
 
@@ -210,10 +212,10 @@ export default {
     }
 
     @media only screen and (max-width: 850px) {
-      width: 30rem;
+      width: 25rem;
     }
     @media only screen and (max-width: 630px) {
-      width: 20rem;
+      width: 15rem;
     }
   }
 

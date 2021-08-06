@@ -381,7 +381,7 @@ form {
 .mainPhoto {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
 
   img {
     max-width: 30vw;
