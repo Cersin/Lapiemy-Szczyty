@@ -16,24 +16,37 @@
     </div>
 
     <div class="routing_mobile">
-      <font-awesome-icon class="bar" icon="bars"/>
+      <font-awesome-icon class="bar" icon="bars" @click="openMenu"/>
     </div>
   </nav>
 
-  <div class="menu-mobile">
-    <router-link class="menu-mobile-element" to="/">Wycieczki</router-link>
-    <router-link class="menu-mobile-element" to="/galeria">Galeria</router-link>
-    <router-link class="menu-mobile-element" to="/o-nas">O nas</router-link>
-    <router-link v-if="isLogged" class="menu-mobile-element" to="/admin">Admin</router-link>
-  </div>
+  <transition name="menu">
+    <div class="menu-mobile" v-if="isMenu">
+      <router-link class="menu-mobile-element" to="/"  @click="openMenu">Wycieczki</router-link>
+      <router-link class="menu-mobile-element" to="/galeria"  @click="openMenu">Galeria</router-link>
+      <router-link class="menu-mobile-element" to="/o-nas"  @click="openMenu">O nas</router-link>
+      <router-link v-if="isLogged" class="menu-mobile-element" to="/admin"  @click="openMenu">Admin</router-link>
+    </div>
+  </transition>
+
 </template>
 
 <script>
 export default {
   name: "TheNavigation",
+  data() {
+    return {
+      isMenu: false
+    }
+  },
   computed: {
     isLogged() {
       return this.$store.getters.isLogged;
+    }
+  },
+  methods: {
+    openMenu() {
+      this.isMenu = !this.isMenu;
     }
   }
 }
@@ -161,12 +174,16 @@ nav {
 }
 
 .routing_mobile {
-  display: flex;
+  display: none;
   align-items: center;
 
   .bar {
     margin-right: 2rem;
     font-size: 2rem;
+  }
+
+  @media only screen and (max-width: 700px) {
+    display: flex;
   }
 }
 
@@ -189,7 +206,14 @@ nav {
       color: black;
     }
   }
+}
 
+.menu-leave-to, .menu-enter {
+  opacity: 0;
+}
+
+.menu-leave-active {
+  transition: opacity 1s;
 }
 
 </style>

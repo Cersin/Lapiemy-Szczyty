@@ -6,6 +6,7 @@ import galleryModule from '@/store/modules/gallery/index'
 
 export default createStore({
   state: {
+    openMenu: false
   },
   mutations: {
   },

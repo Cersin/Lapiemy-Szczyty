@@ -146,7 +146,7 @@ export default {
   margin-right: 2rem;
 }
 .home {
-  min-height: 100%;
+  flex: 1;
   width: 80%;
   margin: 0 auto;
 }
