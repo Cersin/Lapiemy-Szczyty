@@ -1,12 +1,34 @@
 {
-  "name": "lapiemy-szczyty",
-  "version": "0.1.0",
+  "name": "lapiemyszczyty.pl",
+  "description": "Wycieczki górskie to nasza pasja",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
+  "author": {
+    "name": "Szymon Wójcik",
+    "email": "wojcik.szymon1@gmail.com",
+    "url": "https://lapiemyszczyty.pl"
+  },
+  "contributors": [
+    "Adrian Ochała"
+  ],
+  "keywords": [
+    "góry",
+    "beskid",
+    "śląski",
+    "tatry",
+    "zakopane",
+    "trasy",
+    "mountains",
+    "blog",
+    "łapiemy szczyty",
+    "pies",
+    "najlepsze trasy w góry"
+  ],
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^27.0.0",
     "@ckeditor/ckeditor5-horizontal-line": "^27.0.0",

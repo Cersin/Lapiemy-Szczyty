@@ -262,7 +262,6 @@ export default {
                 map: this.post.map
             });
             window.location = '/';
-            // this.$router.push({path:'/'});
       }else if(this.editableArticle.mainPhoto !== this.mainPhoto){
         let formData = new FormData();
         formData.append('upload', this.mainPhoto);
@@ -286,7 +285,6 @@ export default {
               map: this.post.map
             });
             window.location = '/';
-            // this.$router.push({path:'/'});
           } catch (e) {
             console.log(e.message);
             console.log(e.response.data.message);
