@@ -19,6 +19,10 @@
 @import "styles/abstract/variables";
 @import "styles/components/post.scss";
 
+table, tbody, tr, td, .table {
+  border: none !important;
+}
+
 .route-enter-from {
   opacity: .5;
   transform: translateX(-150px);
