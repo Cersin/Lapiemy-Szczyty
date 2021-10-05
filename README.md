@@ -1,5 +1,6 @@
 # lapiemy-szczyty
-
+https://www.lapiemyszczyty.pl/
+backend: https://github.com/Cersin/Lapiemy-szczyty-Backend
 ## Project setup
 ```
 npm install
