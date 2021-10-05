@@ -41,11 +41,10 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "src/styles/abstract/variables";
 @import "src/styles/components/post";
 @import "~vue-wysiwyg/dist/vueWysiwyg.css";
-
 
 .full-article {
   width: 100%;
@@ -57,14 +56,11 @@ export default {
 .post {
   display: flex;
   flex-direction: column;
-  width: 55vw;
-
-  @media only screen and (max-width: 1600px) {
-    width: 60vw;
-  }
+  width: 70%;
+  font-size: 150%;
 
   @media only screen and (max-width: 900px) {
-    width: 100%;
+    width: 90%;
   }
 }
 
@@ -73,9 +69,9 @@ export default {
   justify-content: center;
 
   img {
-    max-width: 30vw;
-    height: auto;
     border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
   }
 }
 
@@ -126,6 +122,7 @@ export default {
   }
 
   &-map {
+    margin-top: 5vh;
 
     iframe {
       height: 40vh;
