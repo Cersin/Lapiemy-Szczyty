@@ -51,7 +51,7 @@ import TheNavigation from "@/components/layout/TheNavigation";
 export default {
   components: {TheNavigation, TheFooter},
   beforeCreate() {
-    console.log(this.$store.dispatch('autoLogin'));
+    this.$store.dispatch('autoLogin');
 
   }
 }

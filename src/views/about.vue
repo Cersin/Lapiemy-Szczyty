@@ -1,9 +1,9 @@
 <template>
-  <div v-if="stats" class="about">
+  <div class="about">
     <div class="czosnek">
       <img src="../assets/czosnek.png" alt="Zdjęcie Czonska">
       <h1>Dzień dobry… Cześć… Ahoj!</h1>
-      <p class="text">Miałem iść czerwonym, nie jednak żółtym.. a może czarnym? Też tak czasem masz? 😊 Jednak jeżeli tutaj dotarłeś aż tutaj to: </p>
+      <p class="text">Miałem iść czerwonym, nie jednak żółtym.. a może czarnym? Też tak czasem masz? 😊 Jednak jeżeli dotarłeś aż tutaj to: </p>
       <ol type="a">
         <li>Kochasz wędrówki górskie</li>
         <li>Szukasz ciekawych wycieczek</li>
@@ -15,7 +15,7 @@
       </p>
       <h2>PS. ŁapieMY szczyty😉</h2>
     </div>
-    <div class="stats">
+    <div class="stats" v-if="stats">
       <h1>Liczba wycieczek</h1>
       <h2>{{ stats.trips }}</h2>
       <h1>Całkowity pokonany dystans</h1>

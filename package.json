@@ -1,7 +1,7 @@
 {
   "name": "lapiemyszczyty.pl",
   "description": "Wycieczki górskie to nasza pasja",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -27,7 +27,8 @@
     "blog",
     "łapiemy szczyty",
     "pies",
-    "najlepsze trasy w góry"
+    "najlepsze trasy w góry",
+    "spkojne trasy"
   ],
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^27.0.0",

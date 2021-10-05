@@ -61,6 +61,7 @@
             :tripTime="article.tripDate"
             :mainPhoto="article.mainPhoto"
       ></card>
+
     </div>
 
     <div class="paginate">
@@ -156,6 +157,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   grid-gap: 3rem;
+  justify-content: center;
   padding: 2rem 0;
   width: 100%;
 }

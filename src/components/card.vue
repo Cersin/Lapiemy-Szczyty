@@ -45,6 +45,8 @@ export default {
   border-radius: 30px;
   padding-bottom: 3rem;
   box-shadow: 10px 2px 10px rgba(0, 0, 0, .1);
+  max-width: 500px;
+  justify-self: center;
 
   img {
     width: 100%;

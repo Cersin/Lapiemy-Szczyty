@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = 'https://lapiemyszczyty.pl'
+const url = 'https://lapiemyszczyty.pl/'
 
 export const HTTP = axios.create({
     url: url,

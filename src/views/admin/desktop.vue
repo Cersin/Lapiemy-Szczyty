@@ -139,7 +139,7 @@ export default {
     align-items: center;
     background-color: $color-secondary-darker;
     width: 100%;
-    height: 100%;
+    height: 100vh;
   }
 
   .container {
